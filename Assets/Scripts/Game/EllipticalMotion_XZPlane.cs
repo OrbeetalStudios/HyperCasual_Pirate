@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class CircularMotion_XZPlane : MonoBehaviour
+public class EllipticalMotion_XZPlane : MonoBehaviour
 {
     [SerializeField]
     private Transform centerPoint; // Center point around which the object rotates
     [SerializeField, Range(0f, 30f)]
-    private float rotationRadius = 2f;
-    [SerializeField, Range(0f, 300f)]
+    private float semiaxis_A, semiaxis_B = 2f;
+    [SerializeField, Range(0f, 50f)]
     private float angularSpeed = 2f;
     [SerializeField]
     private bool clockwiseMotion = false;
+
+    private float angle = 0.0f;
 
     private void Start()
     {
@@ -30,9 +32,12 @@ public class CircularMotion_XZPlane : MonoBehaviour
             transform.rotation = rotation;
 
             // compute new position
-            Vector3 newPosition = centerPoint.position + transform.forward * rotationRadius;
+            Vector3 newPosition = transform.position;
+            newPosition.x = semiaxis_A * Mathf.Cos(angle);
+            newPosition.z = semiaxis_B * Mathf.Sin(angle);
             transform.position = newPosition;
-            transform.RotateAround(centerPoint.position, Vector3.up, (clockwiseMotion ? -1 : 1) * angularSpeed * Time.deltaTime);
+
+            angle += (clockwiseMotion ? (-1) : 1) * angularSpeed * Time.deltaTime;
 
             yield return Timing.WaitForOneFrame;
         }

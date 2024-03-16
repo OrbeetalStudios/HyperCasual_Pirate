@@ -425,8 +425,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPoint: {fileID: 531215833}
-  rotationRadius: 5
-  angularSpeed: 20
+  semiaxis_A: 2
+  semiaxis_B: 2
+  angularSpeed: 1.5
   clockwiseMotion: 0
 --- !u!65 &1819556999
 BoxCollider:
