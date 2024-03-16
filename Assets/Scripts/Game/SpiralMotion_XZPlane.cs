@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class EllipticalMotion_XZPlane : AbstractCircularMotion
+public class SpiralMotion_XZPlane : AbstractCircularMotion
 {
     [SerializeField, Range(0f, 30f)]
     private float semiaxis_A, semiaxis_B = 2f;
+    [SerializeField, Range(0f, 30f)]
+    private float decreaseSpeed = 1.5f;
 
+    private float radius;
+
+    new void Start()
+    {
+        radius = Vector3.Distance(transform.position, targetTransform.position);
+
+        base.Start();
+    }
     protected override IEnumerator<float> Move()
     {
         while (true)
@@ -20,11 +30,12 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
             transform.rotation = rotation;
 
             // compute new position
-            Vector3 newPosition = transform.position;
-            newPosition.x = semiaxis_A * Mathf.Cos(angle);
-            newPosition.z = semiaxis_B * Mathf.Sin(angle);
+            Vector3 newPosition = targetTransform.position;
+            newPosition.x += semiaxis_A * radius * Mathf.Cos(angle);
+            newPosition.z += semiaxis_B * radius * Mathf.Sin(angle);
             transform.position = newPosition;
 
+            radius -= decreaseSpeed * Time.deltaTime;
             angle += (clockwiseMotion ? (-1) : 1) * speed * Time.deltaTime;
 
             yield return Timing.WaitForOneFrame;
