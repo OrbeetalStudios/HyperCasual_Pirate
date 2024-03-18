@@ -36,7 +36,7 @@ public class SpiralMotion_XZPlane : AbstractCircularMotion
             transform.position = newPosition;
 
             radius -= decreaseSpeed * Time.deltaTime;
-            angle += (clockwiseMotion ? (-1) : 1) * speed * Time.deltaTime;
+            angle += (clockwiseMotion ? (-1) : 1) * currentSpeed * Time.deltaTime;
 
             yield return Timing.WaitForOneFrame;
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
-
+using UnityEngine.InputSystem;
 public class EllipticalMotion_XZPlane : AbstractCircularMotion
 {
     [SerializeField, Range(0f, 30f)]
@@ -25,7 +25,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
             newPosition.z = semiaxis_B * Mathf.Sin(angle);
             transform.position = newPosition;
 
-            angle += (clockwiseMotion ? (-1) : 1) * speed * Time.deltaTime;
+            angle += (clockwiseMotion ? (-1) : 1) * currentSpeed * Time.deltaTime;
 
             yield return Timing.WaitForOneFrame;
         }

@@ -13,7 +13,7 @@ public class LinearMotion : AbstractMotionToTarget
             Vector3 relativePos = targetTransform.position - transform.position;
 
             // Update position
-            transform.position += relativePos.normalized * speed * Time.deltaTime;
+            transform.position += relativePos.normalized * currentSpeed * Time.deltaTime;
 
             yield return Timing.WaitForOneFrame;
         }

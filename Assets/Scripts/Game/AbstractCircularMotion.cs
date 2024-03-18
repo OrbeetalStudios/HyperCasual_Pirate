@@ -8,4 +8,6 @@ public abstract class AbstractCircularMotion : AbstractMotionToTarget
     protected bool clockwiseMotion = false;
 
     protected float angle = 0.0f;
+
+    public void InvertDirection() => clockwiseMotion = !clockwiseMotion; 
 }
