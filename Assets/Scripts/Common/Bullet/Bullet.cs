@@ -29,18 +29,21 @@ public class Bullet : MonoBehaviour
         target = targetObject.transform; 
         transform.position = targetObject.transform.position - targetObject.transform.forward * distance; // position of bullet forward player
 
-        Timing.RunCoroutine(Movement());
+        Timing.RunCoroutine(Movement().CancelWith(gameObject));
     }
 
     protected IEnumerator<float> Movement()
     {
         while (true)
         {
-            rb.velocity = -transform.forward * speed;//Direction outside map
-            yield return Timing.WaitForSeconds(10f);
-            Destroy(gameObject);//to implement reuse
-
-
+            if (this != null)
+            {
+                Vector3 perpendicularDirection = Quaternion.Euler(0, 180, 0) * target.forward;//Instantiate the bullet towards the sides of the map
+                rb.velocity = perpendicularDirection * speed;
+                //Direction outside map
+                yield return Timing.WaitForSeconds(10f);
+                Destroy(gameObject);//to implement reuse
+            }
         }
     }
 }
