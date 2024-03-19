@@ -318,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 1855919750002729401}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 1, z: 0}
+  m_LocalPosition: {x: 16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -549,10 +549,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7489004505615018513}
-  speed: 0.3
+  speed: 0.28
   clockwiseMotion: 0
-  semiaxis_A: 16.2
-  semiaxis_B: 7.6
+  semiaxis_A: 16
+  semiaxis_B: 8
 --- !u!114 &7791608244395059048
 MonoBehaviour:
   m_ObjectHideFlags: 0
