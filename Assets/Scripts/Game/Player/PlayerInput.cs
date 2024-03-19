@@ -2,11 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EllipticalMotionController : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private EllipticalMotion_XZPlane ellipticalMotion; // Reference to EllipticalScript
 
     private PlayerControls controls;
+    [SerializeField]
+    PoolController pool;
 
     private void OnEnable()
     {
@@ -28,6 +30,8 @@ public class EllipticalMotionController : MonoBehaviour
         Vector2 inputVector = context.ReadValue<Vector2>();
         float horizontalInput = inputVector.x;
         float verticalInput = inputVector.y;
+        controls.Player.Fire.performed += ctx => pool.SpawnBullet();
+     
 
         // Direction UserInput
         Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
@@ -35,6 +39,7 @@ public class EllipticalMotionController : MonoBehaviour
         // Velocity of Input
         ellipticalMotion.SetMovementDirection(moveDirection);
     }
+
 
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {

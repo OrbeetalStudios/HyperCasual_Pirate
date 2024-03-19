@@ -25,6 +25,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
 
                 // Rotate towards the target
                 Vector3 lookDirection = targetTransform.position - transform.position;
+
                 Quaternion rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
                 transform.rotation = rotation;
 
@@ -58,7 +59,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
     }
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos()//Draw Gizmos for test
     {
         // CheckTargetTrasform is assigned
         if (targetTransform == null)
