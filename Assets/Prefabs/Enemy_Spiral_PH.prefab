@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
-  speed: 1.5
+  speed: 1
   clockwiseMotion: 0
   semiaxis_A: 4
   semiaxis_B: 2

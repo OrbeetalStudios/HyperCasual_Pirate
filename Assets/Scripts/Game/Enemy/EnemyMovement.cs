@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class LinearMotion : AbstractMotionToTarget
+public class EnemyMovement : AbstractMotionToTarget
 {
     protected override IEnumerator<float> Move()
     {
