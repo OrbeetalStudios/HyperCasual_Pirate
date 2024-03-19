@@ -15,19 +15,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "InvertDirection",
-                    "type": "Button",
-                    "id": "24931237-0723-44c0-9f07-ba0246886451",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Stop",
-                    "type": "Button",
-                    "id": "27d8d439-3572-4b83-bc84-8a0c176940ae",
-                    "expectedControlType": "Button",
+                    "name": "Movement",
+                    "type": "PassThrough",
+                    "id": "ccad3d70-6fb3-4ef4-a982-c6462a9a7cf0",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -57,26 +48,70 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "f93c1286-3e55-4b4a-9bfb-7845ca17d9e4",
-                    "path": "<Keyboard>/a",
+                    "name": "Arrow",
+                    "id": "09d1b030-bb80-4148-99d5-0149200bde2c",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "InvertDirection",
-                    "isComposite": false,
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "e59775d4-0e2d-49e8-b908-af054baf87b7",
-                    "path": "<Keyboard>/s",
+                    "name": "left",
+                    "id": "1cfdc994-292e-45c5-a319-8c8fab267ad1",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Stop",
+                    "groups": "",
+                    "action": "Movement",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "41a96195-da6c-4b4b-a037-a7600c294480",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "WASD",
+                    "id": "34dd12a2-8ad8-446d-a8f0-dd3d207a0dbc",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "eb5cf8b8-222b-4c86-a32d-27ac3cf548a3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c5c2a0c4-784f-4ac0-b251-773d779c3255",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
