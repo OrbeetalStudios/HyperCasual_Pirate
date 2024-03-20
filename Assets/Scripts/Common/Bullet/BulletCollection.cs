@@ -24,7 +24,7 @@ public class BulletCollection : ScriptableObject
         }
 
         BulletPrototype defaultBullet = possibleBullet[Random.Range(0, possibleBullet.Count)];
-        GameObject newObjBullet = GameObject.Instantiate(defaultBullet.bulletPrefab);//Position reference?);
+        GameObject newObjBullet = GameObject.Instantiate(defaultBullet.bulletPrefab);
         Bullet bullet = newObjBullet.GetComponent<Bullet>();
         bullet.SetupBullet(defaultBullet);
         return bullet;
