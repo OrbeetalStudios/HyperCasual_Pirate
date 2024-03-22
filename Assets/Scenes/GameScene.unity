@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3fb7d58976c6e48ba78a553ac254ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPools: []
-  bullet: []
+  objectPool: []
+  bulletPool: []
   enemyCollection: {fileID: 11400000, guid: 9c9da522ac53e1c4a8057e468497e45f, type: 2}
   bulletCollection: {fileID: 11400000, guid: abe84de15dc2d8f4eb0a8b0acabd9279, type: 2}
   spawnInterval: 10
@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 7489004505615018513}
   - component: {fileID: 5308506491592981243}
   - component: {fileID: 8261252312401978709}
+  - component: {fileID: 8261252312401978710}
   m_Layer: 0
   m_Name: Island_PH
   m_TagString: Island
@@ -598,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7489004505615018513}
-  speed: 1.6
+  speed: 0.3
   clockwiseMotion: 0
   semiaxis_A: 15.5
   semiaxis_B: 17.3
@@ -615,6 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ellipticalMotion: {fileID: 7791608244395059046}
+  fireRate: 10
   pool: {fileID: 48564973}
 --- !u!23 &8261252312401978709
 MeshRenderer:
@@ -658,6 +660,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &8261252312401978710
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678103044673904336}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8766562
+  m_Center: {x: -0.000009841114, y: -0.0078610275, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

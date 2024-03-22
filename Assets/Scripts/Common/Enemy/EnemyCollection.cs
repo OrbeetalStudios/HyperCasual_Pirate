@@ -26,7 +26,7 @@ public class EnemyCollection : ScriptableObject
         }
 
         EnemyPrototype defaultEnemy = possibleEnemy[Random.Range(0, possibleEnemy.Count)];
-        GameObject newObjEnemy = GameObject.Instantiate(defaultEnemy.enemyPrefab);//Position reference?);
+        GameObject newObjEnemy = GameObject.Instantiate(defaultEnemy.enemyPrefab);
         Enemy enemy = newObjEnemy.GetComponent<Enemy>();
         enemy.SetupEnemy(defaultEnemy);
         return enemy;
