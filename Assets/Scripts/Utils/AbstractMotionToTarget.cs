@@ -7,14 +7,13 @@ public abstract class AbstractMotionToTarget : MonoBehaviour
 {
     [SerializeField]
     protected Transform targetTransform; // target point to reach
-    [SerializeField, Range(0f, 1f)]
+    [SerializeField, Range(0f, 20f)]
     private float speed;
 
     protected float currentSpeed;
 
     protected void Start()
     {
-        
         Timing.RunCoroutine(Move());
     }
 

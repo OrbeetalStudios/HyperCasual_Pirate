@@ -7,6 +7,8 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
 {
     [SerializeField, Range(0f, 30f)]
     private float semiaxis_A, semiaxis_B = 2f;
+    [SerializeField]
+    private GameObject model;
 
     private Vector3 movementDirection = Vector3.zero;
 
@@ -25,6 +27,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
 
                 // Rotate towards the target
                 Vector3 lookDirection = targetTransform.position - transform.position;
+
                 Quaternion rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
                 transform.rotation = rotation;
 
@@ -45,11 +48,13 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
         // If input right movement clocwise
         if (inputVector.x > 0f)
         {
+            model.transform.Rotate(0, 180, 0);
             clockwiseMotion = true;
         }
         // if input left movement counterclockwise
         else if (inputVector.x < 0f)
         {
+            model.transform.Rotate(0, -180, 0);
             clockwiseMotion = false;
         }
 
@@ -58,7 +63,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
     }
 
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos()//Draw Gizmos for test
     {
         // CheckTargetTrasform is assigned
         if (targetTransform == null)
