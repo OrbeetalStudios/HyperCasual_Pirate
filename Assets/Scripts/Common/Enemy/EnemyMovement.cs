@@ -41,10 +41,6 @@ public class EnemyMovement : Enemy
 
             // Update position
             transform.position -= relativePos.normalized * enemySpeed * Time.deltaTime;
-            if(transform.position.x<5 || transform.position.z < 5)//Temporanea per togliere le navi dall'isola
-            {
-                gameObject.SetActive(false);    
-            }
             yield return Timing.WaitForOneFrame;
         }
     }

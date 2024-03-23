@@ -77,9 +77,13 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ho colliso con " + other.gameObject.name);
-            StartCoroutine(UpdateScoreAfterDelay());
-            other.gameObject.SetActive(false);//Deactivate Bullet
+            if(other.gameObject.name != "Island")
+            {
+                Debug.Log("Ho colliso con " + other.gameObject.name);
+                StartCoroutine(UpdateScoreAfterDelay());
+                other.gameObject.SetActive(false);//Deactivate Bullet
+            }
+           
          
             
         }
