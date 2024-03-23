@@ -11,10 +11,16 @@ public class PlayerInput : MonoBehaviour
     private PlayerControls controls;
     private bool cannonIsReady = true;
     [SerializeField, Range(0f,30f)]
-    private float fireRate=10f;
+    private float reloadCannonTime=5f;
+    private bool cannonLoading = false;
+    [SerializeField, Range(0f,10)]
+    private int ammoCount;
+    private int spawnCount;
+    [SerializeField]
+    GameController gc;
     [SerializeField]
     PoolController pool;
-    private bool fireCoroutineRunning = false;
+
 
     private void OnEnable()
     {
@@ -22,34 +28,43 @@ public class PlayerInput : MonoBehaviour
         controls.Enable();
         controls.Player.Movement.performed += OnMovePerformed;
         controls.Player.Movement.canceled += OnMoveCanceled;
-       
+        spawnCount = ammoCount;
     }
 
     private void StartFire()
     {
         if (cannonIsReady == true)
         {
-            pool.SpawnBullet();
-            cannonIsReady=false;
-        }
-        if(cannonIsReady == false && fireCoroutineRunning == true)
-        {
-            Debug.Log("Il cannone è scarico!!!");
-        }
-         if (!cannonIsReady && !fireCoroutineRunning)
-        {
-            Timing.RunCoroutine(loadingCannon());
+            pool.SpawnBullet(spawnCount);
+            ammoCount--;
+            gc.UpdateAmmo(ammoCount);
+            if (ammoCount <= 0)
+            {
+                cannonIsReady = false;
+                if (cannonLoading == false)
+                {
+                    Timing.RunCoroutine(loadingCannon());
+                }
+            }
+            else if (cannonLoading == true)
+            {
+                Debug.Log("Cannon is empty!!!");
+            }
         }
     }
-    protected IEnumerator<float> loadingCannon()
+    protected  IEnumerator<float> loadingCannon()
     {
-        fireCoroutineRunning = true;
+        cannonLoading = true;
         while (true)
         {
-            yield return Timing.WaitForSeconds(fireRate);
+            Debug.Log("Reload Cannon for " + reloadCannonTime+" seconds");
+            yield return Timing.WaitForSeconds(reloadCannonTime);
             cannonIsReady = true;
-            Debug.Log("Il cannone è carico!!!");
-            StopCoroutine(loadingCannon());
+            Debug.Log("Cannon is READY!!!");
+            ammoCount = spawnCount;
+            gc.UpdateAmmo(ammoCount);
+            cannonLoading=false;
+            break;
         }
     }
 
@@ -84,5 +99,6 @@ public class PlayerInput : MonoBehaviour
         ellipticalMotion.SetMovementDirection(Vector3.zero);
     }
 
+    
 
 }

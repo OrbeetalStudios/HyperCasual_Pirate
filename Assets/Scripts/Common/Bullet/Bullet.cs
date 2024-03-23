@@ -10,13 +10,11 @@ public class Bullet : MonoBehaviour
     public Transform target;
     public float distance;
     public float speed;
-    private float timeBulletToSetInActive=10f;
+    private float timeInAir=10f;
     [SerializeField]
     private Rigidbody rb;
-    public void SetupBullet(BulletPrototype _defaultBullet)
-    {
-        
-    }
+
+
 
     public void Start()
     {
@@ -35,7 +33,6 @@ public class Bullet : MonoBehaviour
     public void ResetPosition()
     {
         Start();
-
     }
 
     protected IEnumerator<float> Movement()
@@ -47,11 +44,13 @@ public class Bullet : MonoBehaviour
                 Vector3 perpendicularDirection = Quaternion.Euler(0, 180, 0) * target.forward;//Instantiate the bullet towards the sides of the map
                 rb.velocity = perpendicularDirection * speed;
                 //Direction outside map
-                float timeInAir = timeBulletToSetInActive;
                 yield return Timing.WaitForSeconds(timeInAir);
-                gameObject.SetActive(false);//to implement reuse in objectpool
-                StopCoroutine(Movement());
+                timeInAir = 10f;
+                gameObject.SetActive(false);
+                break; 
             }
         }
     }
+
+
 }

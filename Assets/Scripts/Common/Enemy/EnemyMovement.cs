@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
-using TreeEditor;
-using UnityEngine.UIElements;
 
 public class EnemyMovement : Enemy
 {
-    [SerializeField] 
+    [SerializeField]
     private Transform targetPosition;
     [SerializeField]
     private Transform spawnPosition;
-    LineRenderer lr;//LINE FOR PROTOTYPING
-    public int Resolution;
-    [SerializeField, Range (0f, 100000f)]
-    public float Duration;
-    float startTime;
-    public Transform Marker;
     [SerializeField]
-    private float speedRotationToTarget;
-
+    private float enemySpeed;
     
     private void Start()
     {
@@ -33,22 +24,7 @@ public class EnemyMovement : Enemy
         {
             targetPosition = targetObject.transform; // Set Target
         }
-        lr = GetComponent<LineRenderer>();   
-        lr.positionCount= Resolution;
-        for(int i = 0; i < Resolution; i++)
-        {
-            // relative vector from object to target
-            float t = (float)i/(float) Resolution;
-            Vector3 pos = Vector3.Lerp(spawnPosition.position, targetPosition.position, t);
-            lr.SetPosition(i, pos);
-        }
-
-        //Rotation to target
-        Vector3 direction = targetPosition.position - transform.position;
-        float targetAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, -targetAngle, 0));
-        startTime = Time.time;
-        transform.rotation = targetRotation;
+        
 
         Timing.RunCoroutine(Move());
     }
@@ -56,12 +32,20 @@ public class EnemyMovement : Enemy
     {
         while (true)
         {
-           
-            float t = (Time.time - startTime) / Duration;
-            // Update position
-            Marker.position=Vector3.Lerp(spawnPosition.position, targetPosition.position, t);
-            yield return Timing.WaitForOneFrame;
+            // relative vector from center to object
+            Vector3 relativePos = transform.position - targetPosition.position;
 
+            // Align rotation to radius direction vector, in order to always face the center object
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            transform.rotation = rotation;
+
+            // Update position
+            transform.position -= relativePos.normalized * enemySpeed * Time.deltaTime;
+            if(transform.position.x<5 || transform.position.z < 5)//Temporanea per togliere le navi dall'isola
+            {
+                gameObject.SetActive(false);    
+            }
+            yield return Timing.WaitForOneFrame;
         }
     }
 

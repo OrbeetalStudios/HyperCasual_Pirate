@@ -2,59 +2,58 @@ using MEC;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PoolController : MonoSingleton<PoolController>
+public class PoolController : MonoBehaviour
 {
-    
+    [SerializeField]
+    private GameController gc;
     public List<GameObject> objectPool;
     public List<GameObject> bulletPool;
     public EnemyCollection enemyCollection;
     public BulletCollection bulletCollection;
     [SerializeField]
     private float spawnInterval=30f;
+    public int bulletRecharge=0;
+    //private bool foundInactiveBullet=false;
     private void Start()
     {
         objectPool = new List<GameObject>();
+        InizializeBulletList();
         Timing.RunCoroutine(SpawnEnemy());
     }
 
-    public void SpawnBullet()
+    private  void InizializeBulletList()
     {
-     
-            if (bulletPool.Count > 0)
-            {
-                foreach (GameObject obj in bulletPool)
-                {
-                    if (!obj.activeSelf)
-                    {
-                        GameObject bulletPrefab;
-                        bulletPrefab = obj;
-                        var script = bulletPrefab.GetComponent<Bullet>();
-                        script.ResetPosition();//Reset to initial position of prefab
-                        bulletPrefab.SetActive(true);
-                        //Debug.Log("Sono un proiettile riciclato");
-                      
-                        break;
-                    }
-                    else
-                    {
-                        Bullet bulletInstance = bulletCollection.TakeBullet(default);
-                        GameObject bulletPrefab = bulletInstance.gameObject;
-                        bulletPool.Add(bulletPrefab);
-                
-                    }
+        bulletPool = new List<GameObject>();
+        for (int i = 10; i>= bulletPool.Count; i--)
+        {
+            Bullet bulletInstance = bulletCollection.TakeBullet(default);
+            GameObject bulletPrefab = bulletInstance.gameObject;
+            bulletPrefab.SetActive(false);
+            bulletPool.Add(bulletPrefab);
+        }
+    }
 
-                }
-            }
-            else
+    public void SpawnBullet(int spawnCount)
+    {
+        foreach (GameObject obj in bulletPool)
+        {
+            if (!obj.activeSelf)
             {
-                Bullet bulletInstance = bulletCollection.TakeBullet(default);
-                GameObject bulletPrefab = bulletInstance.gameObject;
-                bulletPool.Add(bulletPrefab);
+                GameObject bulletPrefab = obj;
+                var script = bulletPrefab.GetComponent<Bullet>();
+                script.ResetPosition();
+                bulletPrefab.SetActive(true);
+                break;
             }
+            else continue;
+        }
 
     }
+
+
     protected  IEnumerator<float> SpawnEnemy()
     {
         while (true)
@@ -69,8 +68,10 @@ public class PoolController : MonoSingleton<PoolController>
                     {
                         enemyPrefab = obj;
                         var script= enemyPrefab.GetComponent<Enemy>();
-                        script.transform.position=script.resetPosition;//Reset to initial position of prefab
+                        var scriptMov = enemyPrefab.GetComponent<EnemyMovement>();
+                        script.transform.position=script.resetPosition;//Reset to new position
                         enemyPrefab.SetActive(true);
+                        script.FindAlternativePosition();//prepareAlternativePositionNextRespawn(TOCONFIRM)
                         Debug.Log("Sono stato riciclato");
                         CanRecycle = true;
                         break;
