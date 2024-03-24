@@ -46,13 +46,13 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
 
         // If input right movement clocwise
-        if (inputVector.x > 0f)
+        if (inputVector.x > 0f && !clockwiseMotion)
         {
             model.transform.Rotate(0, 180, 0);
             clockwiseMotion = true;
         }
         // if input left movement counterclockwise
-        else if (inputVector.x < 0f)
+        else if (inputVector.x < 0f && clockwiseMotion)
         {
             model.transform.Rotate(0, -180, 0);
             clockwiseMotion = false;
