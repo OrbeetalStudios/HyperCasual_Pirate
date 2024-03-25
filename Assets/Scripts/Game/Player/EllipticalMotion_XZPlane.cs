@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EllipticalMotion_XZPlane : AbstractCircularMotion
 {
-    [SerializeField, Range(0f, 30f)]
+    [SerializeField, Range(0f, 100f)]
     private float semiaxis_A, semiaxis_B = 2f;
     [SerializeField]
     private GameObject model;
@@ -46,16 +46,16 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
 
         // If input right movement clocwise
-        if (inputVector.x > 0f && !clockwiseMotion)
+        if (inputVector.x > 0f && clockwiseMotion)
         {
             model.transform.Rotate(0, 180, 0);
-            clockwiseMotion = true;
+            clockwiseMotion = false;
         }
         // if input left movement counterclockwise
-        else if (inputVector.x < 0f && clockwiseMotion)
+        else if (inputVector.x < 0f && !clockwiseMotion)
         {
             model.transform.Rotate(0, -180, 0);
-            clockwiseMotion = false;
+            clockwiseMotion = true;
         }
 
         // direction of movement

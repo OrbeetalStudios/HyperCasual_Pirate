@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,7 +172,7 @@ MonoBehaviour:
   bulletPool: []
   enemyCollection: {fileID: 11400000, guid: 9c9da522ac53e1c4a8057e468497e45f, type: 2}
   bulletCollection: {fileID: 11400000, guid: abe84de15dc2d8f4eb0a8b0acabd9279, type: 2}
-  spawnInterval: 10
+  spawnInterval: 8
   bulletRecharge: 0
 --- !u!1 &147198398
 GameObject:
@@ -624,27 +624,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalScale.x
-      value: 17.48286
+      value: 35.36
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20.788097
+      value: 42.04502
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4272465
+      value: 2.8866808
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.71
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.36
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1145,8 +1145,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 19.45
-  far clip plane: 210
-  field of view: 40
+  far clip plane: 1000
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1172,8 +1172,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18398976, y: -0, z: -0, w: 0.98292816}
-  m_LocalPosition: {x: 0, y: 23, z: -64}
+  m_LocalRotation: {x: 0.39346468, y: -0.0000002216548, z: 0.00000007967174, w: 0.9193398}
+  m_LocalPosition: {x: -2.43, y: 135.9, z: -125.4949}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1584,7 +1584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1592,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1604,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2520,10 +2520,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7489004505615018513}
-  speed: 0.3
-  clockwiseMotion: 0
-  semiaxis_A: 19
-  semiaxis_B: 24.2
+  speed: 1
+  clockwiseMotion: 1
+  semiaxis_A: 45
+  semiaxis_B: 35
   model: {fileID: 1243915696}
 --- !u!114 &7791608244395059048
 MonoBehaviour:
@@ -2538,7 +2538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ellipticalMotion: {fileID: 7791608244395059046}
-  reloadCannonTime: 5
+  reloadCannonTime: 3
   ammoCount: 3
   gc: {fileID: 493272061}
   pool: {fileID: 48564973}
