@@ -35,7 +35,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (cannonIsReady == true)
         {
-            pool.SpawnBullet(spawnCount);
+            pool.SpawnBullet();
             ammoCount--;
             gc.UpdateAmmo(ammoCount);
             if (ammoCount <= 0)
@@ -46,10 +46,6 @@ public class PlayerInput : MonoBehaviour
                     Timing.RunCoroutine(loadingCannon());
                 }
             }
-            else if (cannonLoading == true)
-            {
-                Debug.Log("Cannon is empty!!!");
-            }
         }
     }
     protected  IEnumerator<float> loadingCannon()
@@ -57,10 +53,8 @@ public class PlayerInput : MonoBehaviour
         cannonLoading = true;
         while (true)
         {
-            Debug.Log("Reload Cannon for " + reloadCannonTime+" seconds");
             yield return Timing.WaitForSeconds(reloadCannonTime);
             cannonIsReady = true;
-            Debug.Log("Cannon is READY!!!");
             ammoCount = spawnCount;
             gc.UpdateAmmo(ammoCount);
             cannonLoading=false;

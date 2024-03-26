@@ -15,8 +15,7 @@ public class PoolController : MonoBehaviour
     public BulletCollection bulletCollection;
     [SerializeField]
     private float spawnInterval=30f;
-    public int bulletRecharge=0;
-    //private bool foundInactiveBullet=false;
+    
     private void Start()
     {
         objectPool = new List<GameObject>();
@@ -27,7 +26,7 @@ public class PoolController : MonoBehaviour
     private  void InizializeBulletList()
     {
         bulletPool = new List<GameObject>();
-        for (int i = 10; i>= bulletPool.Count; i--)
+        for (int i = 20; i>= bulletPool.Count; i--)
         {
             Bullet bulletInstance = bulletCollection.TakeBullet(default);
             GameObject bulletPrefab = bulletInstance.gameObject;
@@ -36,7 +35,7 @@ public class PoolController : MonoBehaviour
         }
     }
 
-    public void SpawnBullet(int spawnCount)
+    public void SpawnBullet()
     {
         foreach (GameObject obj in bulletPool)
         {
@@ -71,14 +70,13 @@ public class PoolController : MonoBehaviour
                         var scriptMov = enemyPrefab.GetComponent<EnemyMovement>();
                         script.transform.position=script.resetPosition;//Reset to new position
                         enemyPrefab.SetActive(true);
-                        script.FindAlternativePosition();//prepareAlternativePositionNextRespawn(TOCONFIRM)
-                        Debug.Log("Sono stato riciclato");
+                        script.FindAlternativePosition();
                         CanRecycle = true;
                         break;
                     }
                 }
             }
-            if (!CanRecycle && enemyCollection != null) // If dont'have deactive enemy in list take it from Collection
+            if (!CanRecycle && enemyCollection != null) // If dont'have deactiveted enemy in list, take it from Collection
             {
                 enemyPrefab = InstantiateEnemyFromCollection(enemyCollection);
                 objectPool.Add(enemyPrefab);
@@ -102,14 +100,6 @@ public class PoolController : MonoBehaviour
 
     }
 
-    //  To be implemented with multiple prefabs
-
-    /* EnemyPrototype.eEnemyID GetEnemyRandom()
-     {
-         int randomIndex = Random.Range(0, enemyCollection.enemies.Count);
-         return enemyCollection.enemies[randomIndex].enemyID;
-     }
-    */
 
 
 }

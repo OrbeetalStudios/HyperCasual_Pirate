@@ -1,9 +1,11 @@
+using MEC;
 using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
@@ -20,6 +22,8 @@ public class GameController : MonoBehaviour
     private TMP_Text textScore;
     public int currentScore=0;
     [SerializeField]
+    PoolController poolController;
+    [SerializeField]
     public GameObject ammoImage1;
     public GameObject ammoImage2;
     public GameObject ammoImage3;
@@ -29,7 +33,6 @@ public class GameController : MonoBehaviour
     public GameObject lifeImage3;
     private int lifeCount=3;
     public GameObject GameOverPanel;
-    public new AudioSource audio;
     // Start is called before the first frame update
 
     public void UpdateScore()
@@ -45,7 +48,7 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 lifeImage1.SetActive(false);
-                audio.Play();
+                StopAllCoroutinesInScene();
                 GameOverPanel.SetActive(true);
                 break;
 
@@ -94,5 +97,19 @@ public class GameController : MonoBehaviour
         GameOverPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+
+    void StopAllCoroutinesInScene()
+    {
+        // Trova tutti i GameObject nella scena
+        GameObject[] allObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+
+        // Itera su tutti i GameObject e ferma le coroutine attive su ognuno di essi
+        foreach (GameObject obj in allObjects)
+        {
+            Timing.KillCoroutines(obj);
+           
+        }
+
+    }
+  
 }

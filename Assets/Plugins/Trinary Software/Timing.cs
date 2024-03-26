@@ -1037,7 +1037,7 @@ namespace MEC
         /// function to complete the task before ending the current one.
         /// </summary>
         /// <returns>The number of coroutines that were killed.</returns>
-        public static int KillCoroutines()
+        public static int KillCoroutines(GameObject obj)
         {
             return _instance == null ? 0 : _instance.KillCoroutinesOnInstance();
         }
@@ -1167,7 +1167,7 @@ namespace MEC
         /// This will pause all coroutines running on the current MEC instance until ResumeCoroutines is called.
         /// </summary>
         /// <returns>The number of coroutines that were paused.</returns>
-        public static int PauseCoroutines()
+        public static int PauseCoroutines(IEnumerator<float> enumerator)
         {
             return _instance == null ? 0 : _instance.PauseCoroutinesOnInstance();
         }
