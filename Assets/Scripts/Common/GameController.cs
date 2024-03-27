@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     public GameObject lifeImage3;
     private int lifeCount=3;
     public GameObject GameOverPanel;
-    // Start is called before the first frame update
+   
 
     public void UpdateScore()
     {

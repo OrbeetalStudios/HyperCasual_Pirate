@@ -53,11 +53,12 @@ public class Bullet : MonoBehaviour
                 {
                     //DeactivateBulletAtdistanceThreshold
                     gameObject.SetActive(false);
-                    break; 
+                    break;
                 }
                 yield return Timing.DeltaTime;
             }
         }
+        StopCoroutine("Movement");
     }
 
 

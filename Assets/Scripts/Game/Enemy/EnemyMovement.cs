@@ -110,6 +110,7 @@ public class EnemyMovement : Enemy
         canMove = false;
         StopAllCoroutines();
         plunderTime = plunderDefault;
+       
     }
 
 }

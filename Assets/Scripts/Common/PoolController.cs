@@ -67,7 +67,6 @@ public class PoolController : MonoBehaviour
                     {
                         enemyPrefab = obj;
                         var script= enemyPrefab.GetComponent<Enemy>();
-                        var scriptMov = enemyPrefab.GetComponent<EnemyMovement>();
                         script.transform.position=script.resetPosition;//Reset to new position
                         enemyPrefab.SetActive(true);
                         script.FindAlternativePosition();
