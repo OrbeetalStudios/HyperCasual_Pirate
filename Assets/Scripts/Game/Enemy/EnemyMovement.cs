@@ -5,8 +5,8 @@ using MEC;
 
 public class EnemyMovement : Enemy
 {
-    [SerializeField]
-    private Transform targetPosition;
+ 
+    
     [SerializeField]
     private Transform spawnPosition;
     [SerializeField]
@@ -19,10 +19,9 @@ public class EnemyMovement : Enemy
     [SerializeField]    
     private int plunderTime;
     private int plunderDefault;
-    private bool inPlunder=false;
+    private bool inPlunder = false;
     private float distanceTraveled;
     private float distanceThreshold = 150f;
-    private Vector3 centerPositionMap;
     private float defaultSpeed;
 
     private void OnEnable()
@@ -35,24 +34,14 @@ public class EnemyMovement : Enemy
     {
         defaultSpeed=enemySpeed;
         plunderDefault = plunderTime;
-        centerPositionMap = Vector3.zero;
-        spawnPosition = transform;
-        GameObject targetObject = GameObject.FindWithTag("Island"); // FindTargetObjectwhenSpawn
-        if (targetObject == null)
-        {
-            Debug.LogError("Island Target not found!");
-        }
-        else
-        {
-            targetPosition = targetObject.transform; // Set Target
-        }
+        
     }
 
     public void StartPlunder()
     {
         canMove = false;
         StopCoroutine("Move");
-        Vector3 relativePos = transform.position - targetPosition.position;
+        Vector3 relativePos = transform.position - Vector3.zero;
         Quaternion rotation = Quaternion.LookRotation(relativePos,Vector3.up);
         rotation *= Quaternion.Euler(0, 90, 0);
         transform.rotation = rotation;
@@ -67,7 +56,7 @@ public class EnemyMovement : Enemy
         while (canMove==true)
         {
             // relative vector from center to object
-            Vector3 relativePos = transform.position - targetPosition.position;
+            Vector3 relativePos = transform.position - Vector3.zero;
 
             // Align rotation to radius direction vector, in order to always face the center object
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
@@ -86,7 +75,7 @@ public class EnemyMovement : Enemy
             if (plunderTime <= 0)
             {
                 assaultArea.SetActive(false);
-                Vector3 relativePos = transform.position - targetPosition.position;
+                Vector3 relativePos = transform.position - Vector3.zero;
                 Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
                 rotation *= Quaternion.Euler(0, 180, 0);
                 transform.rotation = rotation;
@@ -106,7 +95,7 @@ public class EnemyMovement : Enemy
         while (this.isActiveAndEnabled)
         {
             transform.position += relativePos.normalized * enemySpeed * Time.deltaTime;
-            distanceTraveled = (transform.position - centerPositionMap).magnitude;
+            distanceTraveled = (transform.position - Vector3.zero).magnitude;
             if (distanceTraveled >= distanceThreshold)
             {
                 //DeactivateEnemyAtdistanceThreshold
