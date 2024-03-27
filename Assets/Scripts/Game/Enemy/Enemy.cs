@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private GameController gc;
     [SerializeField]
     private EnemyMovement movement;
+    public Renderer shipRenderer;
 
     public void SetupEnemy(EnemyPrototype _defaultEnemy)
     {
@@ -38,8 +39,15 @@ public class Enemy : MonoBehaviour
         {
             gc = gameController.GetComponent<GameController>();
            
+
         }
        
+    }
+    public void ChangeColor()// Metodo per cambiare il colore della nave
+    {
+        shipRenderer = GetComponentInChildren<Renderer>();
+        Color newColor = Color.yellow;
+        shipRenderer.material.color = newColor;
     }
 
     public void FindAlternativePosition()
