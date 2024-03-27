@@ -11,11 +11,10 @@ public class EnemyMovement : Enemy
     private float enemySpeed;
     private bool canMove = true;
     [SerializeField]
-    private GameObject assaultArea;
-    [SerializeField]    
-    private int plunderTime;
-    private int plunderDefault;
-    private bool inPlunder = false;
+    private GameObject assaultArea;  
+    public int plunderTime;
+    public int plunderDefault;
+    public bool inPlunder = false;
     private float distanceTraveled;
     private float distanceThreshold = 150f;
     

@@ -14,6 +14,7 @@ public class EnemyBoarding : MonoBehaviour
     private int resetCount;
     private bool playerInside=false;
     private bool startCount=false;
+    private EnemyMovement enemyMovScript;
 
     private void OnEnable()
     {
@@ -23,6 +24,7 @@ public class EnemyBoarding : MonoBehaviour
     private void Start()
     {
         resetCount = Countdown;
+        enemyMovScript=enemyObj.GetComponent<EnemyMovement>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,6 +34,8 @@ public class EnemyBoarding : MonoBehaviour
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.green;
             playerInside = true;
+            enemyMovScript.inPlunder = false;
+            enemyMovScript.StopCoroutine("Plunder");
             if (startCount == false)
             {
                 Timing.RunCoroutine(countDownCoroutine());
@@ -46,6 +50,9 @@ public class EnemyBoarding : MonoBehaviour
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.red;
             playerInside = false;
+            enemyMovScript.inPlunder = true;
+            enemyMovScript.plunderTime = enemyMovScript.plunderDefault;
+            enemyMovScript.StartCoroutine("Plunder");
             ResetCount();
         }
     }
