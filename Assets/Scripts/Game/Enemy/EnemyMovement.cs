@@ -5,14 +5,10 @@ using MEC;
 
 public class EnemyMovement : Enemy
 {
- 
-    
     [SerializeField]
     private Transform spawnPosition;
     [SerializeField]
     private float enemySpeed;
-    [SerializeField]
-    private GameObject model;
     private bool canMove = true;
     [SerializeField]
     private GameObject assaultArea;
@@ -22,7 +18,7 @@ public class EnemyMovement : Enemy
     private bool inPlunder = false;
     private float distanceTraveled;
     private float distanceThreshold = 150f;
-    private float defaultSpeed;
+    
 
     private void OnEnable()
     {
@@ -32,9 +28,7 @@ public class EnemyMovement : Enemy
 
     private void Awake()
     {
-        defaultSpeed=enemySpeed;
-        plunderDefault = plunderTime;
-        
+        plunderDefault = plunderTime;   
     }
 
     public void StartPlunder()
@@ -116,7 +110,6 @@ public class EnemyMovement : Enemy
         canMove = false;
         StopAllCoroutines();
         plunderTime = plunderDefault;
-        enemySpeed = defaultSpeed;
     }
 
 }
