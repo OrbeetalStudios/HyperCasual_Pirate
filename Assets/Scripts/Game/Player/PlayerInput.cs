@@ -60,6 +60,7 @@ public class PlayerInput : MonoBehaviour
             cannonLoading=false;
             break;
         }
+        StopCoroutine("loadingCannon");
     }
 
 

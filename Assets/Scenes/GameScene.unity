@@ -716,6 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd3dec0b49dbef409caa3099742a1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 7791608244395059048}
   panelScore: {fileID: 147198398}
   lifePanel: {fileID: 159233075}
   cannonPanel: {fileID: 1672767800}

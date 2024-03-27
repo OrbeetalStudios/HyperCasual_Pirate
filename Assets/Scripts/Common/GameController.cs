@@ -13,6 +13,8 @@ using UnityEngine.UIElements;
 public class GameController : MonoBehaviour
 {
     [SerializeField]
+    private PlayerInput playerInput;
+    [SerializeField]
     private GameObject panelScore;
     [SerializeField]
     private GameObject lifePanel;
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 lifeImage1.SetActive(false);
+                playerInput.enabled=false;   
                 StopAllCoroutinesInScene();
                 GameOverPanel.SetActive(true);
                 break;
