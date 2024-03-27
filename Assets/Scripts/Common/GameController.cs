@@ -101,6 +101,10 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
     void StopAllCoroutinesInScene()
     {
         // Trova tutti i GameObject nella scena
