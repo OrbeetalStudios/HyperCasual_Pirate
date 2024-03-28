@@ -9,7 +9,6 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
     private float semiaxis_A, semiaxis_B = 2f;
     [SerializeField]
     private GameObject model;
-
     private Vector3 movementDirection = Vector3.zero;
 
     protected override IEnumerator<float> Move()
@@ -26,7 +25,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
                 transform.position = newPosition;
 
                 // Rotate towards the target
-                Vector3 lookDirection = targetTransform.position - transform.position;
+                Vector3 lookDirection = Vector3.zero - transform.position;
 
                 Quaternion rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
                 transform.rotation = rotation;
@@ -81,6 +80,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
         {
             float x = semiaxis_A * Mathf.Cos(currentAngle) + ellipseCenter.x;
             float z = semiaxis_B * Mathf.Sin(currentAngle) + ellipseCenter.z;
+            
             Vector3 currentPosition = new Vector3(x, ellipseCenter.y, z);
             if (currentAngle > 0)
             {

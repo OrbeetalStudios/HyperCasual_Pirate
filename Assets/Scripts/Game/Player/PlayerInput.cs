@@ -20,6 +20,8 @@ public class PlayerInput : MonoBehaviour
     GameController gc;
     [SerializeField]
     PoolController pool;
+    public float raycastDistance = 20000f;
+    public LayerMask raycastMask;
 
 
     private void OnEnable()
@@ -28,8 +30,29 @@ public class PlayerInput : MonoBehaviour
         controls.Enable();
         controls.Player.Movement.performed += OnMovePerformed;
         controls.Player.Movement.canceled += OnMoveCanceled;
+        Timing.RunCoroutine(rayCastTarget());
         spawnCount = ammoCount;
     }
+
+    protected IEnumerator<float> rayCastTarget()
+    {
+        while (isActiveAndEnabled)
+        {
+            Debug.DrawRay(transform.position, -transform.forward * raycastDistance, Color.red);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.forward, out hit, raycastDistance, raycastMask))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    Enemy enemyComponent = hit.collider.GetComponent<Enemy>();
+                    enemyComponent.ChangeColor();
+                }
+            }
+            yield return Timing.WaitForOneFrame;
+        }
+        StopCoroutine("rayCastTarget");
+    }
+
 
     private void StartFire()
     {

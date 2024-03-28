@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4107848473949761084}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
+  shipRenderer: {fileID: 0}
 --- !u!114 &1297428307796833193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,12 +70,13 @@ MonoBehaviour:
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
-  targetPosition: {fileID: 0}
+  shipRenderer: {fileID: 0}
   spawnPosition: {fileID: 0}
   enemySpeed: 3
-  model: {fileID: 8497289246007460623}
   assaultArea: {fileID: 4655593177920169884}
   plunderTime: 15
+  plunderDefault: 0
+  inPlunder: 0
 --- !u!65 &738415285023344151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -223,8 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObj: {fileID: 2054213451365819344}
-  initialCountdown: 5
-  resetCount: 0
+  Countdown: 5
 --- !u!54 &5934370826307928342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -342,11 +343,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
---- !u!1 &8497289246007460623 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
-  m_PrefabInstance: {fileID: 8731642251493031518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9126473318020798901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}

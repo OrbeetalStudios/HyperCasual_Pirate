@@ -2929,6 +2929,10 @@ MonoBehaviour:
   ammoCount: 3
   gc: {fileID: 493272061}
   pool: {fileID: 48564973}
+  raycastDistance: 233
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!65 &7791608244395059049
 BoxCollider:
   m_ObjectHideFlags: 0
