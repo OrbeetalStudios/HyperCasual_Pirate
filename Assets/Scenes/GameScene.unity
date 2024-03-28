@@ -400,9 +400,10 @@ GameObject:
   m_Component:
   - component: {fileID: 48564972}
   - component: {fileID: 48564973}
+  - component: {fileID: 48564974}
   m_Layer: 0
   m_Name: ObjectPool
-  m_TagString: Untagged
+  m_TagString: ObjectPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +440,22 @@ MonoBehaviour:
   bulletPool: []
   enemyCollection: {fileID: 11400000, guid: 9c9da522ac53e1c4a8057e468497e45f, type: 2}
   bulletCollection: {fileID: 11400000, guid: abe84de15dc2d8f4eb0a8b0acabd9279, type: 2}
-  spawnInterval: 8
+  spawnInterval: 3
+--- !u!114 &48564974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48564971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d3c1c46affc5744b183d00ea5e6cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 180
+  minSpawnDistance: 20
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &147198398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1386,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: ProspectiveCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1833,7 +1849,7 @@ GameObject:
   - component: {fileID: 1352934277}
   - component: {fileID: 1352934276}
   m_Layer: 0
-  m_Name: CameraIso
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2630,7 +2646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668504971}
   m_Layer: 0
-  m_Name: AlternativeCamera
+  m_Name: OrtographicCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

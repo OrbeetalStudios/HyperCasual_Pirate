@@ -55,6 +55,7 @@ public class PoolController : MonoBehaviour
 
     protected  IEnumerator<float> SpawnEnemy()
     {
+        
         while (true)
         {
             GameObject enemyPrefab;
@@ -66,9 +67,9 @@ public class PoolController : MonoBehaviour
                     if (!obj.activeSelf)
                     {
                         enemyPrefab = obj;
-                        var script= enemyPrefab.GetComponent<Enemy>();
+                        var script= GetComponent<EnemySpawnPoint>();
                         enemyPrefab.SetActive(true);
-                        script.FindAlternativePosition();
+                        script.GetRandomSpawnPoint();
                         CanRecycle = true;
                         break;
                     }
@@ -101,3 +102,5 @@ public class PoolController : MonoBehaviour
 
 
 }
+
+

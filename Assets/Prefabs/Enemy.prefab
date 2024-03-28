@@ -49,11 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27329248526c35343a3eb5420d920c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 180
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
-  shipRenderer: {fileID: 0}
+  logicSpawnPoint: {fileID: 0}
 --- !u!114 &1297428307796833193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,11 +65,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aca434e3225abb48b830833e31c1216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 180
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
-  shipRenderer: {fileID: 0}
+  logicSpawnPoint: {fileID: 0}
   spawnPosition: {fileID: 0}
   enemySpeed: 3
   assaultArea: {fileID: 4655593177920169884}

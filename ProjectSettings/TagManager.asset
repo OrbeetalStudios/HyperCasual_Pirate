@@ -7,6 +7,7 @@ TagManager:
   - Island
   - Bullet
   - Enemy
+  - ObjectPool
   layers:
   - Default
   - TransparentFX

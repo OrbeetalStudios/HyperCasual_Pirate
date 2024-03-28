@@ -6,22 +6,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
-    [SerializeField, Range(0f, 180f)]//180 more rendering distance with this settings
-    private float spawnRadius;
+   
     public Vector3 resetPosition;
-    private List<Vector3> spawnPoints = new List<Vector3>();
     [SerializeField]
     private GameController gc;
     [SerializeField]
     private EnemyMovement movement;
-    public Renderer shipRenderer;
-
+    [SerializeField]
+    private EnemySpawnPoint logicSpawnPoint;
+    
     public void SetupEnemy(EnemyPrototype _defaultEnemy)
     {
-        FindSpawnPoint();
+     
         SetInitialPosition();
-        FindAlternativePosition();
+        
         //Damage
         //Speed
         //type
@@ -41,44 +39,31 @@ public class Enemy : MonoBehaviour
         }
        
     }
-    public void ChangeColor()// Metodo per cambiare il colore della nave
+
+    private void Awake()
     {
-        shipRenderer = GetComponentInChildren<Renderer>();
-        Color newColor = Color.yellow;
-        shipRenderer.material.color = newColor;
+        GameObject pool = GameObject.FindWithTag("ObjectPool");
+        logicSpawnPoint= pool.GetComponent<EnemySpawnPoint>();
     }
 
+    //Crea una lista di 360 punti diversi
+    //fai una ricerca binaria nella lista
+    //scegli un punto e salvalo
+    //cerca un altro punto abbastanza distante dal precedente
+    //quando la lista finisce ripeti
 
 
-    public void FindAlternativePosition()
-    { 
-        //Alternative position for respawn
-        FindSpawnPoint();
-        Vector3 randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        resetPosition = randomSpawnPoint;
-    }
 
     public void SetInitialPosition()
     {
-        Vector3 randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        transform.position = randomSpawnPoint;
-    }
-    public void FindSpawnPoint()
-    {
-        //Create Random Spawn Point
-        for (int i = 0; i < 360; i++)//casual point for 360 degrees push in list!
-        {
-            float angle = Random.Range(0f, Mathf.PI * 2f); // Generating casual angle
-
-            float x = spawnRadius * Mathf.Cos(angle);
-            float z = spawnRadius * Mathf.Sin(angle);
-
-            Vector3 randomPoint = new Vector3(x, 0f, z);
-            spawnPoints.Add(randomPoint);
-        }
+        logicSpawnPoint.GetRandomSpawnPoint();
+        transform.position= logicSpawnPoint.spawnPoint;
     }
 
-     void OnTriggerEnter(Collider other)
+
+  
+
+    void OnTriggerEnter(Collider other)
     {
 
         switch (other.tag)
@@ -115,6 +100,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.position = resetPosition;
+        logicSpawnPoint.GetRandomSpawnPoint();
+        transform.position = logicSpawnPoint.spawnPoint;
     }
 }
