@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     GameController gc;
     [SerializeField]
     PoolController pool;
-    public float raycastDistance = 20000f;
+    public float raycastDistance;
     public LayerMask raycastMask;
 
 
@@ -47,6 +47,7 @@ public class PlayerInput : MonoBehaviour
                     Enemy enemyComponent = hit.collider.GetComponent<Enemy>();
                     enemyComponent.ChangeColor();
                 }
+
             }
             yield return Timing.WaitForOneFrame;
         }
