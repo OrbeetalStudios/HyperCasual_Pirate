@@ -38,8 +38,6 @@ public class Enemy : MonoBehaviour
         else
         {
             gc = gameController.GetComponent<GameController>();
-           
-
         }
        
     }
@@ -113,5 +111,8 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
+    private void OnDisable()
+    {
+        transform.position = resetPosition;
+    }
 }
