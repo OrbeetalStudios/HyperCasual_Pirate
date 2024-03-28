@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     public Material originalMaterial;
     private Renderer render;
     private Enemy lastHitEnemy;
-    private bool hitten=false;
+    private bool IsHit=false;
  
     private void OnEnable()
     {
@@ -54,19 +54,19 @@ public class PlayerInput : MonoBehaviour
                         lastHitEnemy = enemyComponent;
                         render = enemyComponent.GetComponentInChildren<MeshRenderer>();
                         render.material = highlightMaterial;
-                        hitten= true;   
+                        IsHit= true;   
                     }
                 }
                
             }
             else
             {
-                if (hitten == true)
+                if (IsHit == true)
                 {
                     render = lastHitEnemy.GetComponentInChildren<MeshRenderer>();
                     render.material = originalMaterial;
                     lastHitEnemy = null; // Azzera l'ultimo nemico colpito
-                    hitten = false;
+                    IsHit = false;
                 }
                
             }
