@@ -944,6 +944,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
       propertyPath: m_Name
       value: ISOLA
@@ -2933,6 +2937,8 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 1
+  highlightMaterial: {fileID: -1725942987148635205, guid: a47c0a49b37f2f6449cd9c102351933f, type: 3}
+  originalMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!65 &7791608244395059049
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -22,8 +22,12 @@ public class PlayerInput : MonoBehaviour
     PoolController pool;
     public float raycastDistance;
     public LayerMask raycastMask;
-
-
+    public Material highlightMaterial;
+    public Material originalMaterial;
+    private Renderer render;
+    private Enemy lastHitEnemy;
+    private bool hitten=false;
+ 
     private void OnEnable()
     {
         controls = new PlayerControls();
@@ -45,9 +49,26 @@ public class PlayerInput : MonoBehaviour
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     Enemy enemyComponent = hit.collider.GetComponent<Enemy>();
-                    enemyComponent.ChangeColor();
+                    if (enemyComponent != null)
+                    {
+                        lastHitEnemy = enemyComponent;
+                        render = enemyComponent.GetComponentInChildren<MeshRenderer>();
+                        render.material = highlightMaterial;
+                        hitten= true;   
+                    }
                 }
-
+               
+            }
+            else
+            {
+                if (hitten == true)
+                {
+                    render = lastHitEnemy.GetComponentInChildren<MeshRenderer>();
+                    render.material = originalMaterial;
+                    lastHitEnemy = null; // Azzera l'ultimo nemico colpito
+                    hitten = false;
+                }
+               
             }
             yield return Timing.WaitForOneFrame;
         }

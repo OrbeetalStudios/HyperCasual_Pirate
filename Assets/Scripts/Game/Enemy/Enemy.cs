@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
         shipRenderer.material.color = newColor;
     }
 
+
+
     public void FindAlternativePosition()
     { 
         //Alternative position for respawn
