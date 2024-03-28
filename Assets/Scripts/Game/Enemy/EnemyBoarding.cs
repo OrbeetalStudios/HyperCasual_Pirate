@@ -51,8 +51,7 @@ public class EnemyBoarding : MonoBehaviour
             spriteRenderer.color = Color.red;
             playerInside = false;
             enemyMovScript.inPlunder = true;
-            enemyMovScript.plunderTime = enemyMovScript.plunderDefault;
-            enemyMovScript.StartCoroutine("Plunder");
+            enemyMovScript.RestartPlunder();
             ResetCount();
         }
     }
@@ -67,14 +66,13 @@ public class EnemyBoarding : MonoBehaviour
         startCount = true;
         while (playerInside==true)
         {
-           
-            Countdown--;
             if (Countdown ==0)
             {
                 enemyObj.SetActive(false);
                 playerInside =false;   
             }
-            Debug.Log("Tempo " + Countdown);
+           // Debug.Log("Tempo " + Countdown);
+            Countdown--;
             yield return Timing.WaitForSeconds(1f);
         }
         startCount=false;

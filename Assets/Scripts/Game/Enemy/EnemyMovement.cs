@@ -63,6 +63,7 @@ public class EnemyMovement : Enemy
 
     protected IEnumerator<float> Plunder()
     {
+       
         while (inPlunder==true)
         {
             if (plunderTime <= 0)
@@ -79,6 +80,12 @@ public class EnemyMovement : Enemy
             plunderTime--;
             yield return Timing.WaitForSeconds(1f);
         }
+       
+    }
+
+    public void RestartPlunder()
+    {
+        Timing.RunCoroutine(Plunder());
     }
 
 
