@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : PlayerMovement
 {
-    [SerializeField] private EllipticalMotion_XZPlane ellipticalMotion; // Reference to EllipticalScript
-
     private PlayerControls controls;
     private bool cannonIsReady = true;
     [SerializeField, Range(0f,30f)]
@@ -129,14 +127,14 @@ public class PlayerInput : MonoBehaviour
         Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         // Velocity of Input
-        ellipticalMotion.SetMovementDirection(moveDirection);
+        SetMovementDirection(moveDirection);
     }
 
 
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
         // When button is Unpressed stopMovement
-        ellipticalMotion.SetMovementDirection(Vector3.zero);
+        SetMovementDirection(Vector3.zero);
     }
 
     

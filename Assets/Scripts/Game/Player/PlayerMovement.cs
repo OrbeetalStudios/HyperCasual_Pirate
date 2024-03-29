@@ -1,9 +1,9 @@
-using System.Collections;
-using UnityEngine;
 using MEC;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class EllipticalMotion_XZPlane : AbstractCircularMotion
+public class PlayerMovement : Player
 {
     [SerializeField, Range(0f, 100f)]
     private float semiaxis_A, semiaxis_B = 2f;
@@ -11,7 +11,11 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
     private GameObject model;
     private Vector3 movementDirection = Vector3.zero;
 
-    protected override IEnumerator<float> Move()
+    private void Start()
+    {
+        Timing.RunCoroutine(Move());
+    }
+    protected  IEnumerator<float> Move()
     {
         while (true)
         {
@@ -64,12 +68,10 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
 
     private void OnDrawGizmos()//Draw Gizmos for test
     {
-        // CheckTargetTrasform is assigned
-        if (targetTransform == null)
-            return;
+      
 
         // calculate CenterOFEllipse
-        Vector3 ellipseCenter = targetTransform.position;
+        Vector3 ellipseCenter = Vector3.zero;
 
         // drawPath
         Gizmos.color = Color.green;
@@ -80,7 +82,7 @@ public class EllipticalMotion_XZPlane : AbstractCircularMotion
         {
             float x = semiaxis_A * Mathf.Cos(currentAngle) + ellipseCenter.x;
             float z = semiaxis_B * Mathf.Sin(currentAngle) + ellipseCenter.z;
-            
+
             Vector3 currentPosition = new Vector3(x, ellipseCenter.y, z);
             if (currentAngle > 0)
             {

@@ -905,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd3dec0b49dbef409caa3099742a1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 7791608244395059048}
+  playerInput: {fileID: 0}
   panelScore: {fileID: 147198398}
   lifePanel: {fileID: 159233075}
   cannonPanel: {fileID: 1672767800}
@@ -1842,7 +1842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1850,7 +1850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1862,7 +1862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2760,7 +2760,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1036650266193326275}
   - component: {fileID: 3094651362993063134}
-  - component: {fileID: 7791608244395059046}
   - component: {fileID: 7333641586394767643}
   - component: {fileID: 7791608244395059048}
   - component: {fileID: 7791608244395059049}
@@ -2926,24 +2925,6 @@ CapsuleCollider:
   m_Height: 10.059649
   m_Direction: 0
   m_Center: {x: 0.03538811, y: -2.8169825, z: -0.043757636}
---- !u!114 &7791608244395059046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855919750002729401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9671d357ccc5ff469043f6b6fe68899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTransform: {fileID: 7489004505615018513}
-  speed: 1
-  clockwiseMotion: 1
-  semiaxis_A: 45
-  semiaxis_B: 35
-  model: {fileID: 1243915696}
 --- !u!114 &7791608244395059048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,7 +2937,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21529ea04e8d93948b8904ebfdbc92bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ellipticalMotion: {fileID: 7791608244395059046}
+  speed: 1
+  semiaxis_A: 33
+  semiaxis_B: 37
+  model: {fileID: 1243915696}
   reloadCannonTime: 3
   ammoCount: 3
   gc: {fileID: 493272061}
