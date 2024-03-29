@@ -2937,8 +2937,8 @@ MonoBehaviour:
   semiaxis_A: 45
   semiaxis_B: 43
   model: {fileID: 1243915696}
-  reloadCannonTime: 3
-  ammoCount: 3
+  reloadCannonTime: 5
+  fireRatio: 1
   gc: {fileID: 493272061}
   pool: {fileID: 48564973}
   raycastDistance: 233

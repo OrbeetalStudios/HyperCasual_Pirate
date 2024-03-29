@@ -7,13 +7,12 @@ using UnityEngine.InputSystem;
 public class PlayerInput : PlayerMovement
 {
     private PlayerControls controls;
-    private bool cannonIsReady = true;
     [SerializeField, Range(0f,30f)]
-    private float reloadCannonTime=5f;
+    private float reloadCannonTime;
+    [SerializeField, Range(0f, 10f)]
+    private float fireRatio;
     private bool cannonLoading = false;
-    [SerializeField, Range(0f,10)]
-    private int ammoCount;
-    private int spawnCount;
+    private int ammoCount=3;
     [SerializeField]
     GameController gc;
     [SerializeField]
@@ -25,7 +24,9 @@ public class PlayerInput : PlayerMovement
     private Renderer render;
     private Enemy lastHitEnemy;
     private bool IsHit=false;
- 
+    private bool canFire = true;
+    private float reload;
+
     private void OnEnable()
     {
         controls = new PlayerControls();
@@ -33,7 +34,6 @@ public class PlayerInput : PlayerMovement
         controls.Player.Movement.performed += OnMovePerformed;
         controls.Player.Movement.canceled += OnMoveCanceled;
         Timing.RunCoroutine(rayCastTarget().CancelWith(gameObject));
-        spawnCount = ammoCount;
     }
 
    
@@ -41,34 +41,42 @@ public class PlayerInput : PlayerMovement
 
     private void StartFire()
     {
-        if (cannonIsReady == true)
+        if (ammoCount!=0 && canFire)
         {
             pool.SpawnBullet();
             ammoCount--;
+            reload=reloadCannonTime;
+            Timing.RunCoroutine(FireRatio(fireRatio).CancelWith(gameObject));
             gc.UpdateAmmo(ammoCount);
-            if (ammoCount <= 0)
+            if (ammoCount < 3 && !cannonLoading)
             {
-                cannonIsReady = false;
-                if (cannonLoading == false)
-                {
-                    Timing.RunCoroutine(loadingCannon().CancelWith(gameObject));
-                }
+             Timing.RunCoroutine(loadingCannon().CancelWith(gameObject));
             }
         }
     }
     protected  IEnumerator<float> loadingCannon()
     {
         cannonLoading = true;
-        while (true)
+        while (ammoCount<3)
         {
-            yield return Timing.WaitForSeconds(reloadCannonTime);
-            cannonIsReady = true;
-            ammoCount = spawnCount;
+            yield return Timing.WaitForSeconds(reload);
+            ammoCount++;
             gc.UpdateAmmo(ammoCount);
-            cannonLoading=false;
-            break;
         }
+        cannonLoading = false;
         StopCoroutine("loadingCannon");
+    }
+
+    protected IEnumerator<float> FireRatio(float fireRatio)
+    {
+        while (fireRatio > 0)
+        {
+            canFire = false;
+            fireRatio--;
+            yield return Timing.WaitForSeconds(1f);
+        }
+        canFire = true;
+        StopCoroutine("FireRatio");
     }
 
 
