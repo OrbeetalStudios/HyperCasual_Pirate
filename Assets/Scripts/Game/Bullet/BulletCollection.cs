@@ -7,7 +7,7 @@ public class BulletCollection : ScriptableObject
 {
     public List<BulletPrototype> bullets = new List<BulletPrototype>();
 
-    public Bullet TakeBullet(BulletPrototype.eBulletID type)// Cerca direttamente il proiettile con l'ID specificato
+    public Bullet TakeBullet(BulletPrototype.eBulletID type)// Cerca direttamente il proiettile con l'ID specificato al momento della chiamata nel pool
     {
       
         foreach (var bullet in bullets)

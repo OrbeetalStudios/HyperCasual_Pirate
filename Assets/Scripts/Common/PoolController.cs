@@ -87,7 +87,7 @@ public class PoolController : MonoBehaviour
     {
         if (collection != null)
         {
-            Enemy enemyInstance = collection.TakeEnemy(default);
+            Enemy enemyInstance = collection.TakeEnemy(default);//prende un proiettile con id default
 
             if (enemyInstance != null)
             {
