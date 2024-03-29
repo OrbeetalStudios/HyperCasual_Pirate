@@ -11,8 +11,7 @@ public class Enemy : MonoBehaviour
     private float spawnRadius;
     public Vector3 resetPosition;
     private List<Vector3> spawnPoints = new List<Vector3>();
-    [SerializeField]
-    private GameController gc;
+    public GameController gc;
     [SerializeField]
     private EnemyMovement movement;
 
@@ -105,8 +104,4 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        transform.position = resetPosition;
-    }
 }

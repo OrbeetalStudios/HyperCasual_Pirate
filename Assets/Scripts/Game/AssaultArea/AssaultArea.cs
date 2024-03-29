@@ -5,7 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyBoarding : MonoBehaviour
+public class AssaultArea : MonoBehaviour
 {
     [SerializeField]
     GameObject enemyObj;

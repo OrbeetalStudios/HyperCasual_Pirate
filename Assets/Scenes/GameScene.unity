@@ -1286,15 +1286,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6.4171176
+      value: 6.41712
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.9527624
+      value: 3.952763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.32604
+      value: 3.3260412
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1302,11 +1302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45234662
+      value: -2.1345105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.056543328
+      value: 0.05654333
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2895,7 +2895,7 @@ Transform:
   m_GameObject: {fileID: 6678103044673904336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: 0}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 7.0742216, y: 7.0742216, z: 7.0742216}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2921,10 +2921,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.6247268
-  m_Height: 10.059649
+  m_Radius: 4.3425407
+  m_Height: 9.095827
   m_Direction: 0
-  m_Center: {x: 0.03538811, y: -2.8169825, z: -0.043757636}
+  m_Center: {x: -0.01591079, y: -2.8169825, z: 0.27059937}
 --- !u!114 &7791608244395059048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2938,8 +2938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  semiaxis_A: 33
-  semiaxis_B: 37
+  semiaxis_A: 45
+  semiaxis_B: 43
   model: {fileID: 1243915696}
   reloadCannonTime: 3
   ammoCount: 3

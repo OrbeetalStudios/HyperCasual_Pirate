@@ -16,8 +16,6 @@ public class Player : MonoBehaviour
         currentSpeed = speed;//For Prototype changes in-game
     }
 
-   //public void Stop() => currentSpeed = currentSpeed != 0f ? 0f : speed;
-
     [HideInInspector]
     protected bool clockwiseMotion = false;
 

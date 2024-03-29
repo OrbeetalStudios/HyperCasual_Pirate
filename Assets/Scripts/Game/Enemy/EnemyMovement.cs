@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using System;
 
 public class EnemyMovement : Enemy
 {
@@ -17,12 +18,26 @@ public class EnemyMovement : Enemy
     public bool inPlunder = false;
     private float distanceTraveled;
     private float distanceThreshold = 150f;
-    
+    [SerializeField]
+    private Renderer render;
+    [SerializeField]
+    private Material originalMaterial;
+
 
     private void OnEnable()
     {
+        GameObject gameController = GameObject.FindWithTag("GameController"); // FindTargetObjectwhenSpawn
+        if (gameController == null)
+        {
+            Debug.LogError("GameCOntroller for enemy not found!");
+        }
+        else
+        {
+            gc = gameController.GetComponent<GameController>();
+        }
         canMove = true;
         Timing.RunCoroutine(Move());
+
     }
 
     private void Awake()
@@ -116,7 +131,9 @@ public class EnemyMovement : Enemy
         canMove = false;
         StopAllCoroutines();
         plunderTime = plunderDefault;
-       
+        transform.position = resetPosition;
+        render.material = originalMaterial;
+
     }
 
 }
