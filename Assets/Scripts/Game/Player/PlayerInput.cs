@@ -11,7 +11,6 @@ public class PlayerInput : PlayerMovement
     private float reloadCannonTime;
     [SerializeField, Range(0f, 10f)]
     private float fireRatio;
-    private bool cannonLoading = false;
     private int ammoCount=3;
     [SerializeField]
     GameController gc;
@@ -25,8 +24,9 @@ public class PlayerInput : PlayerMovement
     private Enemy lastHitEnemy;
     private bool IsHit=false;
     private bool canFire = true;
+    private bool firePress=false;
     private float reload;
-
+    private bool isLoading = false;
     private void OnEnable()
     {
         controls = new PlayerControls();
@@ -34,6 +34,7 @@ public class PlayerInput : PlayerMovement
         controls.Player.Movement.performed += OnMovePerformed;
         controls.Player.Movement.canceled += OnMoveCanceled;
         Timing.RunCoroutine(rayCastTarget().CancelWith(gameObject));
+        reload = reloadCannonTime;
     }
 
    
@@ -41,32 +42,55 @@ public class PlayerInput : PlayerMovement
 
     private void StartFire()
     {
-        if (ammoCount!=0 && canFire)
+       
+        if (ammoCount > 0 && canFire)
         {
-            pool.SpawnBullet();
+            firePress = true;
             ammoCount--;
-            reload=reloadCannonTime;
-            Timing.RunCoroutine(FireRatio(fireRatio).CancelWith(gameObject));
+            Debug.Log(ammoCount);
             gc.UpdateAmmo(ammoCount);
-            if (ammoCount < 3 && !cannonLoading)
+            pool.SpawnBullet();
+            Timing.RunCoroutine(FireRatio(fireRatio).CancelWith(gameObject));
+            if (ammoCount < 3 && !isLoading)
             {
-             Timing.RunCoroutine(loadingCannon().CancelWith(gameObject));
+                firePress = false;
+                Timing.RunCoroutine(loadingCannon().CancelWith(gameObject));
             }
         }
+       
     }
     protected  IEnumerator<float> loadingCannon()
     {
-        cannonLoading = true;
-        while (ammoCount<3)
+        isLoading = true;
+        while (ammoCount < 3)
         {
-            yield return Timing.WaitForSeconds(reload);
-            ammoCount++;
-            gc.UpdateAmmo(ammoCount);
+            // Se il tempo di ricarica è scaduto e il giocatore non ha premuto il pulsante di fuoco
+            if (reload == 0)
+            {
+                ammoCount++; // Incrementa il conteggio delle munizioni
+                gc.UpdateAmmo(ammoCount); // Aggiorna l'HUD
+                reload = reloadCannonTime; // Reimposta il tempo di ricarica
+            }
+
+            // Decrementa il tempo di ricarica se non è ancora scaduto
+            if (reload > 0)
+                reload--;
+
+            // Se il giocatore ha premuto il pulsante di fuoco, reimposta il tempo di ricarica
+            if (firePress)
+            {
+                reload = reloadCannonTime; // Reimposta il tempo di ricarica
+                firePress = false; // Resetta il flag di pressione del pulsante di fuoco
+            }
+
+            yield return Timing.WaitForSeconds(1f);
         }
-        cannonLoading = false;
+
+        isLoading = false;
         StopCoroutine("loadingCannon");
     }
 
+   
     protected IEnumerator<float> FireRatio(float fireRatio)
     {
         while (fireRatio > 0)

@@ -81,7 +81,6 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < ammoImages.Length; i++)
         {
             SetImageTransparency(ammoImages[i], i >= ammoCount ? 0.5f : 1f);
-
         }
     }
 
