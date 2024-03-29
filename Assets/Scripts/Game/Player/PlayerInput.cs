@@ -32,46 +32,11 @@ public class PlayerInput : PlayerMovement
         controls.Enable();
         controls.Player.Movement.performed += OnMovePerformed;
         controls.Player.Movement.canceled += OnMoveCanceled;
-        Timing.RunCoroutine(rayCastTarget());
+        Timing.RunCoroutine(rayCastTarget().CancelWith(gameObject));
         spawnCount = ammoCount;
     }
 
-    protected IEnumerator<float> rayCastTarget()
-    {
-        while (isActiveAndEnabled)
-        {
-            Debug.DrawRay(transform.position, -transform.forward * raycastDistance, Color.red);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, -transform.forward, out hit, raycastDistance, raycastMask))
-            {
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    Enemy enemyComponent = hit.collider.GetComponent<Enemy>();
-                    if (enemyComponent != null)
-                    {
-                        lastHitEnemy = enemyComponent;
-                        render = enemyComponent.GetComponentInChildren<MeshRenderer>();
-                        render.material = highlightMaterial;
-                        IsHit= true;   
-                    }
-                }
-               
-            }
-            else
-            {
-                if (IsHit == true)
-                {
-                    render = lastHitEnemy.GetComponentInChildren<MeshRenderer>();
-                    render.material = originalMaterial;
-                    lastHitEnemy = null; // Azzera l'ultimo nemico colpito
-                    IsHit = false;
-                }
-               
-            }
-            yield return Timing.WaitForOneFrame;
-        }
-        StopCoroutine("rayCastTarget");
-    }
+   
 
 
     private void StartFire()
@@ -86,7 +51,7 @@ public class PlayerInput : PlayerMovement
                 cannonIsReady = false;
                 if (cannonLoading == false)
                 {
-                    Timing.RunCoroutine(loadingCannon());
+                    Timing.RunCoroutine(loadingCannon().CancelWith(gameObject));
                 }
             }
         }
@@ -137,6 +102,41 @@ public class PlayerInput : PlayerMovement
         SetMovementDirection(Vector3.zero);
     }
 
-    
+    protected IEnumerator<float> rayCastTarget()
+    {
+        while (isActiveAndEnabled)
+        {
+            Debug.DrawRay(transform.position, -transform.forward * raycastDistance, Color.red);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.forward, out hit, raycastDistance, raycastMask))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    Enemy enemyComponent = hit.collider.GetComponent<Enemy>();
+                    if (enemyComponent != null)
+                    {
+                        lastHitEnemy = enemyComponent;
+                        render = enemyComponent.GetComponentInChildren<MeshRenderer>();
+                        render.material = highlightMaterial;
+                        IsHit = true;
+                    }
+                }
+
+            }
+            else
+            {
+                if (IsHit == true)
+                {
+                    render = lastHitEnemy.GetComponentInChildren<MeshRenderer>();
+                    render.material = originalMaterial;
+                    lastHitEnemy = null; // Azzera l'ultimo nemico colpito
+                    IsHit = false;
+                }
+
+            }
+            yield return Timing.WaitForOneFrame;
+        }
+        StopCoroutine("rayCastTarget");
+    }
 
 }

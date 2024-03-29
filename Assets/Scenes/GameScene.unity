@@ -905,19 +905,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd3dec0b49dbef409caa3099742a1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  panelScore: {fileID: 147198398}
-  lifePanel: {fileID: 159233075}
-  cannonPanel: {fileID: 1672767800}
-  textScore: {fileID: 1547806293}
-  currentScore: 0
-  poolController: {fileID: 48564973}
-  ammoImage1: {fileID: 1774436212}
-  ammoImage2: {fileID: 286595107}
-  ammoImage3: {fileID: 1260749563}
-  lifeImage1: {fileID: 393757221}
-  lifeImage2: {fileID: 773162217}
-  lifeImage3: {fileID: 1228990858}
+  scoreText: {fileID: 1547806293}
+  lifeImages:
+  - {fileID: 1228990860}
+  - {fileID: 773162219}
+  - {fileID: 393757223}
+  ammoImages:
+  - {fileID: 1774436214}
+  - {fileID: 286595109}
+  - {fileID: 1260749565}
   GameOverPanel: {fileID: 771177059}
 --- !u!4 &493272062
 Transform:

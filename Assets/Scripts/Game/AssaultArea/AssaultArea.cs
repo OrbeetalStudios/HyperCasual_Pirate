@@ -38,7 +38,7 @@ public class AssaultArea : MonoBehaviour
             enemyMovScript.StopCoroutine("Plunder");
             if (startCount == false)
             {
-                Timing.RunCoroutine(countDownCoroutine());
+                Timing.RunCoroutine(countDownCoroutine().CancelWith(gameObject));
             }
         }  
     }

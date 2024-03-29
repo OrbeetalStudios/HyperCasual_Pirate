@@ -36,7 +36,7 @@ public class EnemyMovement : Enemy
             gc = gameController.GetComponent<GameController>();
         }
         canMove = true;
-        Timing.RunCoroutine(Move());
+        Timing.RunCoroutine(Move().CancelWith(gameObject));
 
     }
 
@@ -55,7 +55,7 @@ public class EnemyMovement : Enemy
         transform.rotation = rotation;
         assaultArea.SetActive(true);
         inPlunder = true;   
-        Timing.RunCoroutine(Plunder());
+        Timing.RunCoroutine(Plunder().CancelWith(gameObject));
 
 
     }
@@ -89,7 +89,7 @@ public class EnemyMovement : Enemy
                 rotation *= Quaternion.Euler(0, 180, 0);
                 transform.rotation = rotation;
                 inPlunder = false;
-                Timing.RunCoroutine(ReturnOutsideMap(relativePos));
+                Timing.RunCoroutine(ReturnOutsideMap(relativePos).CancelWith(gameObject));
                 StopCoroutine("Plunder");
             }
             plunderTime--;
@@ -100,7 +100,7 @@ public class EnemyMovement : Enemy
 
     public void RestartPlunder()
     {
-        Timing.RunCoroutine(Plunder());
+        Timing.RunCoroutine(Plunder().CancelWith(gameObject));
     }
 
 

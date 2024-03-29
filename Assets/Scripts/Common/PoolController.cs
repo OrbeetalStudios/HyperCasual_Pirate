@@ -20,7 +20,7 @@ public class PoolController : MonoBehaviour
     {
         objectPool = new List<GameObject>();
         InizializeBulletList();
-        Timing.RunCoroutine(SpawnEnemy());
+        Timing.RunCoroutine(SpawnEnemy().CancelWith(gameObject)); 
     }
 
     private  void InizializeBulletList()

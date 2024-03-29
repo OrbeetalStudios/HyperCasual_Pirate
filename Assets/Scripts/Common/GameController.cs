@@ -1,120 +1,116 @@
 using MEC;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerInput playerInput;
-    [SerializeField]
-    private GameObject panelScore;
-    [SerializeField]
-    private GameObject lifePanel;
-    [SerializeField]
-    private GameObject cannonPanel;
-    [SerializeField]
-    private TMP_Text textScore;
-    public int currentScore=0;
-    [SerializeField]
-    PoolController poolController;
-    [SerializeField]
-    public GameObject ammoImage1;
-    public GameObject ammoImage2;
-    public GameObject ammoImage3;
-    [SerializeField]
-    public GameObject lifeImage1;
-    public GameObject lifeImage2;
-    public GameObject lifeImage3;
-    private int lifeCount=3;
-    public GameObject GameOverPanel;
-   
+    // Dichiarazione degli eventi per la vita, il punteggio e le munizioni
+    public event Action<int> LifeUpdated;
+    public event Action<int> ScoreUpdated;
+    public event Action<int> AmmoUpdated;
+
+    // Riferimenti agli oggetti UI
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private Image[] lifeImages;
+    [SerializeField] private Image[] ammoImages;
+    [SerializeField] private GameObject GameOverPanel;
+
+
+    private int currentScore = 0;
+    private int lifeCount = 3;
+
+    private void Start()
+    {
+        // Inizializza UI
+        UpdateScoreUI();
+        UpdateLifeUI();
+       
+    }
 
     public void UpdateScore()
     {
         currentScore++;
-        textScore.text=currentScore.ToString();
+        ScoreUpdated?.Invoke(currentScore);
+        UpdateScoreUI();
     }
 
     public void UpdateLife()
     {
         lifeCount--;
-        switch (lifeCount)
-        {
-            case 0:
-                lifeImage1.SetActive(false);
-                playerInput.enabled=false;   
-                StopAllCoroutinesInScene();
-                GameOverPanel.SetActive(true);
-                break;
+        LifeUpdated?.Invoke(lifeCount);
+        UpdateLifeUI();
 
-            case 1:
-                lifeImage2.SetActive(false);
-                break;
-            case 2:
-                lifeImage3.SetActive(false);
-                break;
-            case 3:
-                lifeImage1.SetActive(true);
-                lifeImage2.SetActive(true);
-                lifeImage3.SetActive(true);
-                break;
-
-
-        }
+        if (lifeCount <= 0)
+            GameOver();
     }
 
     public void UpdateAmmo(int ammoCount)
     {
-        switch (ammoCount)
-        {
-            case 0:
-              ammoImage1.SetActive(false);
-                break; 
-            
-            case 1:
-                ammoImage2.SetActive(false);
-                break;
-            case 2:
-                ammoImage3.SetActive(false);
-                break;
-            case 3:
-                ammoImage1.SetActive(true);
-                ammoImage2.SetActive(true);
-                ammoImage3.SetActive(true);
-                break;
+        AmmoUpdated?.Invoke(ammoCount);
+        UpdateAmmoUI(ammoCount);
+    }
 
+    private void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    private void UpdateScoreUI()
+    {
+        scoreText.text = currentScore.ToString();
+    }
+
+    private void UpdateLifeUI()
+    {
+        for (int i = 0; i < lifeImages.Length; i++)
+        {
+            lifeImages[i].gameObject.SetActive(i < lifeCount);
+            if (lifeCount == 0)
+            {
+                GameOver();
+            }
+        }
+    }
+
+    private void UpdateAmmoUI(int ammoCount)
+    {
+        for (int i = 0; i < ammoImages.Length; i++)
+        {
+            SetImageTransparency(ammoImages[i], i >= ammoCount ? 0.5f : 1f);
 
         }
     }
 
-  public void Restart()
+
+    private void SetImageTransparency(Image image, float alpha)
+    {
+        if (image != null)
+        {
+            // Ottieni il colore corrente dell'immagine
+            Color currentColor = image.color;
+
+            // Imposta il valore alpha del colore
+            currentColor.a = alpha;
+
+            // Applica il nuovo colore all'immagine
+            image.color = currentColor;
+        }
+    }
+
+    public void Restart()
     {
         GameOverPanel.SetActive(false);
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
 
     public void ExitGame()
     {
         Application.Quit();
     }
-    void StopAllCoroutinesInScene()
-    {
-        // Trova tutti i GameObject nella scena
-        GameObject[] allObjects = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-
-        // Itera su tutti i GameObject e ferma le coroutine attive su ognuno di essi
-        foreach (GameObject obj in allObjects)
-        {
-            Timing.KillCoroutines(obj);
-           
-        }
-
-    }
-  
 }
