@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,27 +10,21 @@ public class EnemyCollection : ScriptableObject
 
     public Enemy TakeEnemy(EnemyPrototype.eEnemyID type)
     {
-        List<EnemyPrototype> possibleEnemy = new List<EnemyPrototype>();
-        for (int i = 0; i < enemies.Count; i++)
+        // Cerca direttamente il nemico con l'ID specificato
+        foreach (var enemy in enemies)
         {
-            if (enemies[i].enemyID == type)
+            if (enemy.enemyID == type)
             {
-                possibleEnemy.Add(enemies[i]);
+                // Se trova il nemico, lo istanzia e lo restituisce
+                GameObject newObjEnemy = GameObject.Instantiate(enemy.enemyPrefab);
+                Enemy enemyComponent = newObjEnemy.GetComponent<Enemy>();
+                enemyComponent.SetupEnemy(enemy);
+                return enemyComponent;
             }
-
-        }
-        if (possibleEnemy.Count == 0)
-        {
-            Debug.LogError("Nothing enemies type: " + type);
         }
 
-        EnemyPrototype defaultEnemy = possibleEnemy[Random.Range(0, possibleEnemy.Count)];
-        GameObject newObjEnemy = GameObject.Instantiate(defaultEnemy.enemyPrefab);
-        Enemy enemy = newObjEnemy.GetComponent<Enemy>();
-        enemy.SetupEnemy(defaultEnemy);
-        return enemy;
+        // Se non viene trovato un nemico con l'ID specificato, genera un errore
+        Debug.LogError("No enemy found with type: " + type);
+        return null;
     }
-
-
 }
-

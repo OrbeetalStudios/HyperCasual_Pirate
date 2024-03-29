@@ -2,32 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="NewBulletCollection",menuName ="Create New Bullet Collection")]
+[CreateAssetMenu(fileName = "NewBulletCollection", menuName = "Create New Bullet Collection")]
 public class BulletCollection : ScriptableObject
 {
-    public List<BulletPrototype> bullets = new List<BulletPrototype>(); 
+    public List<BulletPrototype> bullets = new List<BulletPrototype>();
 
-    public Bullet TakeBullet(BulletPrototype.eBulletID type)
+    public Bullet TakeBullet(BulletPrototype.eBulletID type)// Cerca direttamente il proiettile con l'ID specificato
     {
-        List<BulletPrototype> possibleBullet = new List<BulletPrototype>();
-        for (int i = 0; i < bullets.Count; i++)
+      
+        foreach (var bullet in bullets)
         {
-            if (bullets[i].bulletID == type)
+            if (bullet.bulletID == type)
             {
-                possibleBullet.Add(bullets[i]);
+                // Se trova il proiettile, lo istanzia e lo restituisce
+                GameObject newObjBullet = GameObject.Instantiate(bullet.bulletPrefab);
+                Bullet bulletComponent = newObjBullet.GetComponent<Bullet>();
+                return bulletComponent;
             }
-
-        }
-        if (possibleBullet.Count == 0)
-        {
-            Debug.LogError("Nothing bullets type: " + type);
         }
 
-        BulletPrototype defaultBullet = possibleBullet[Random.Range(0, possibleBullet.Count)];
-        GameObject newObjBullet = GameObject.Instantiate(defaultBullet.bulletPrefab);
-        Bullet bullet = newObjBullet.GetComponent<Bullet>();
-        return bullet;
+        // Se non viene trovato un proiettile con l'ID specificato, genera un errore
+        Debug.LogError("No bullet found with type: " + type);
+        return null;
     }
-
-   
 }
