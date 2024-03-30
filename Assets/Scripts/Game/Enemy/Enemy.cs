@@ -26,13 +26,12 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void OnEnable()
+    private void Start()
     {
         GameObject gameController = GameObject.FindWithTag("GameController"); // FindGameControllerForUI
         gc = gameController.GetComponent<GameController>();
-        
-       
     }
+
 
 
     public void FindAlternativePosition()
@@ -65,6 +64,7 @@ public class Enemy : MonoBehaviour
 
      void OnTriggerEnter(Collider other)
     {
+       
 
         switch (other.tag)
         {

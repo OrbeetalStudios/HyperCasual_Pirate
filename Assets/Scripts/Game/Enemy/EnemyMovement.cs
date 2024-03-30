@@ -7,8 +7,6 @@ using System;
 public class EnemyMovement : Enemy
 {
     [SerializeField]
-    private Transform spawnPosition;
-    [SerializeField]
     private float enemySpeed;
     private bool canMove = true;
     [SerializeField]
