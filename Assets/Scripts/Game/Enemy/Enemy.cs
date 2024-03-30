@@ -28,15 +28,9 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        GameObject gameController = GameObject.FindWithTag("GameController"); // FindTargetObjectwhenSpawn
-        if (gameController == null)
-        {
-            Debug.LogError("GameCOntroller for enemy not found!");
-        }
-        else
-        {
-            gc = gameController.GetComponent<GameController>();
-        }
+        GameObject gameController = GameObject.FindWithTag("GameController"); // FindGameControllerForUI
+        gc = gameController.GetComponent<GameController>();
+        
        
     }
 
@@ -75,11 +69,12 @@ public class Enemy : MonoBehaviour
         switch (other.tag)
         {
             case "Player":
-                
-                StartCoroutine(UpdatelifeAfterDelay());
+                gc.UpdateLife();
+                gameObject.SetActive(false);
                 break;
             case "Bullet":
-                StartCoroutine(UpdateScoreAfterDelay());
+                gc.UpdateScore();
+                gameObject.SetActive(false);
                 other.gameObject.SetActive(false);//Deactivate Bullet
                 break;
             case "Island":
@@ -88,20 +83,4 @@ public class Enemy : MonoBehaviour
 
         }        
      }
-     IEnumerator UpdateScoreAfterDelay()
-    {
-        // AttendForBugDubleAssign
-        yield return new WaitForSeconds(0.01f);
-        gc.UpdateScore();
-        gameObject.SetActive(false);
-    }
-
-    IEnumerator UpdatelifeAfterDelay()
-    {
-        // AttendForBugDubleAssign
-        yield return new WaitForSeconds(0.01f);
-        gc.UpdateLife();
-        gameObject.SetActive(false);
-    }
-
 }
