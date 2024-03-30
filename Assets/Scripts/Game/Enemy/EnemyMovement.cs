@@ -26,18 +26,8 @@ public class EnemyMovement : Enemy
 
     private void OnEnable()
     {
-        GameObject gameController = GameObject.FindWithTag("GameController"); // FindTargetObjectwhenSpawn
-        if (gameController == null)
-        {
-            Debug.LogError("GameCOntroller for enemy not found!");
-        }
-        else
-        {
-            gc = gameController.GetComponent<GameController>();
-        }
         canMove = true;
         Timing.RunCoroutine(Move().CancelWith(gameObject));
-
     }
 
     private void Awake()
@@ -133,7 +123,6 @@ public class EnemyMovement : Enemy
         plunderTime = plunderDefault;
         transform.position = resetPosition;
         render.material = originalMaterial;
-
     }
 
 }
