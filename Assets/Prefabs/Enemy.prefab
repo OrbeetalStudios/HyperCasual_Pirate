@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1297428307796833193}
   - component: {fileID: 738415285023344151}
   - component: {fileID: 4107848473949761084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -52,7 +52,6 @@ MonoBehaviour:
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
-  spawnPosition: {fileID: 0}
   enemySpeed: 3
   assaultArea: {fileID: 4655593177920169884}
   plunderTime: 15
@@ -164,6 +163,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle
       objectReference: {fileID: 0}
+    - target: {fileID: 3864610203423059517, guid: e419719818742cf4d9364a437ab3bc52, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -242,6 +245,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_Name
       value: pirate ship low poly
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

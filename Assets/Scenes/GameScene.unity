@@ -1336,6 +1336,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Isola grande
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 74b40608528e6274aa40bc0f8e16b082, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1867,6 +1871,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_Name
       value: pirate ship low poly
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f47e3f81a372cf941973f0ba84d44868, type: 3}
       propertyPath: m_IsActive
@@ -2758,8 +2766,7 @@ GameObject:
   - component: {fileID: 3094651362993063134}
   - component: {fileID: 7333641586394767643}
   - component: {fileID: 7791608244395059048}
-  - component: {fileID: 7791608244395059049}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2797,7 +2804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7489004505615018513}
   - component: {fileID: 7489004505615018514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Island
   m_TagString: Island
   m_Icon: {fileID: 0}
@@ -2944,30 +2951,9 @@ MonoBehaviour:
   raycastDistance: 233
   raycastMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 72
   highlightMaterial: {fileID: -1725942987148635205, guid: a47c0a49b37f2f6449cd9c102351933f, type: 3}
   originalMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
---- !u!65 &7791608244395059049
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855919750002729401}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.99999994, y: 1.0000001, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
