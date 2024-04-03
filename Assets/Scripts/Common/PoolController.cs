@@ -13,17 +13,60 @@ public class PoolController : MonoBehaviour
     public List<GameObject> bulletPool;
     public EnemyCollection enemyCollection;
     public BulletCollection bulletCollection;
+
+    [SerializeField] private List<PoolObject> collections;
+
     [SerializeField]
     private float spawnInterval=30f;
     
     private void Start()
     {
+        InitializeCollections();
+
         objectPool = new List<GameObject>();
         InizializeBulletList();
         Timing.RunCoroutine(SpawnEnemy().CancelWith(gameObject)); 
     }
+    private void InitializeCollections()
+    {
+        foreach (PoolObject coll in collections)
+        {
+            coll.collection = new List<GameObject>();
 
-    private  void InizializeBulletList()
+            for (int i = 0; i < coll.numberOfObjects; i++)
+            {
+                GameObject obj = Instantiate(coll.prefab);
+                obj.SetActive(false);
+                coll.collection.Add(obj);
+            }
+        }
+    }
+    public GameObject GetObjectFromCollection(EPoolObjectType id)
+    {
+        foreach (PoolObject coll in collections)
+        {
+            if (coll.objID == id)
+            {
+                foreach (GameObject obj in coll.collection)
+                {
+                    if (!obj.activeSelf)
+                    {
+                        return obj;
+                    }
+                }
+
+                // If all objects in the pool are in use, expand the pool
+                GameObject newObj = Instantiate(coll.prefab);
+                newObj.SetActive(false);
+                coll.collection.Add(newObj);
+                return newObj;
+            }
+        }
+
+        // If the specified id is not found, return null
+        return null;
+    }
+    private void InizializeBulletList()
     {
         bulletPool = new List<GameObject>();
         for (int i = 20; i>= bulletPool.Count; i--)

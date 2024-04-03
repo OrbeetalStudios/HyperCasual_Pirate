@@ -439,6 +439,9 @@ MonoBehaviour:
   bulletPool: []
   enemyCollection: {fileID: 11400000, guid: 9c9da522ac53e1c4a8057e468497e45f, type: 2}
   bulletCollection: {fileID: 11400000, guid: abe84de15dc2d8f4eb0a8b0acabd9279, type: 2}
+  collections:
+  - {fileID: 11400000, guid: fba6e1d344735494dac1368d04de1b50, type: 2}
+  - {fileID: 11400000, guid: eada33fc8c8f9e0459f883b569fdce94, type: 2}
   spawnInterval: 8
 --- !u!1 &147198398
 GameObject:
