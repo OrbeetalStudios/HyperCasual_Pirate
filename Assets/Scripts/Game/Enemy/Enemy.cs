@@ -15,7 +15,11 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private EnemyMovement movement;
 
-    public void SetupEnemy(EnemyPrototype _defaultEnemy)
+    protected void Awake()
+    {
+        SetupEnemy();
+    }
+    public void SetupEnemy()
     {
         FindSpawnPoint();
         SetInitialPosition();
@@ -32,7 +36,10 @@ public class Enemy : MonoBehaviour
         gc = gameController.GetComponent<GameController>();
     }
 
-
+    protected void OnEnable()
+    {
+        FindAlternativePosition();
+    }
 
     public void FindAlternativePosition()
     { 
