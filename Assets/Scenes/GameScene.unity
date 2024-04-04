@@ -3030,7 +3030,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   highlightMaterial: {fileID: -1725942987148635205, guid: a47c0a49b37f2f6449cd9c102351933f, type: 3}
-  originalMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  originalMaterial: {fileID: 3548951601036501923, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -58,7 +58,7 @@ MonoBehaviour:
   plunderDefault: 0
   inPlunder: 0
   render: {fileID: 7992926150301721306}
-  originalMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  originalMaterial: {fileID: -6535512506995588235, guid: 9be88e9a27323504cbebf9bf86deda35, type: 3}
 --- !u!65 &738415285023344151
 BoxCollider:
   m_ObjectHideFlags: 0
