@@ -81,6 +81,8 @@ public class Enemy : MonoBehaviour
                 break;
             case "Bullet":
                 gc.UpdateScore();
+                SpawnBox();
+
                 gameObject.SetActive(false);
                 other.gameObject.SetActive(false);//Deactivate Bullet
                 break;
@@ -90,4 +92,11 @@ public class Enemy : MonoBehaviour
 
         }        
      }
+
+    private void SpawnBox()
+    {
+        GameObject box = PoolController.Instance.GetObjectFromCollection(EPoolObjectType.box);
+        box.transform.localPosition = this.transform.localPosition;
+        box.SetActive(true);
+    }
 }

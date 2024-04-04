@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PoolController : MonoBehaviour
+public class PoolController : MonoSingleton<PoolController>
 {
     [SerializeField] private List<PoolObject> collections;
     [SerializeField] private float spawnInterval=30f;
@@ -24,7 +24,7 @@ public class PoolController : MonoBehaviour
 
             for (int i = 0; i < coll.numberOfObjects; i++)
             {
-                GameObject obj = Instantiate(coll.prefab);
+                GameObject obj = Instantiate(coll.prefab, this.transform);
                 obj.SetActive(false);
                 coll.collection.Add(obj);
             }
