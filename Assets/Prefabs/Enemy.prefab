@@ -52,6 +52,7 @@ MonoBehaviour:
   resetPosition: {x: 0, y: 0, z: 0}
   gc: {fileID: 0}
   movement: {fileID: 1297428307796833193}
+  spawnChance: 1
   enemySpeed: 3
   assaultArea: {fileID: 4655593177920169884}
   plunderTime: 15
