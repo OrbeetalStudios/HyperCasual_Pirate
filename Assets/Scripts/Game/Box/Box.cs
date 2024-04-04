@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Box : LinearMotionToTarget
 {
-    private void Awake()
+    void Start()
     {
-        targetTransform.position = Vector3.zero;
-
         GameObject island;
         if (island = GameObject.FindWithTag("Island"))
         {
-            targetTransform.position = island.transform.position;
+            targetPosition = island.transform.position;
         }
+
+        base.Start();
     }
     void OnTriggerEnter(Collider other)
     {
