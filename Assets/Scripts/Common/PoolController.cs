@@ -5,99 +5,69 @@ using System.Collections.ObjectModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PoolController : MonoBehaviour
+public class PoolController : MonoSingleton<PoolController>
 {
-    [SerializeField]
-    private GameController gc;
-    public List<GameObject> objectPool;
-    public List<GameObject> bulletPool;
-    public EnemyCollection enemyCollection;
-    public BulletCollection bulletCollection;
-    [SerializeField]
-    private float spawnInterval=30f;
+    [SerializeField] private List<PoolObject> collections;
+    [SerializeField] private float spawnInterval=30f;
     
     private void Start()
     {
-        objectPool = new List<GameObject>();
-        InizializeBulletList();
+        InitializeCollections();
+
         Timing.RunCoroutine(SpawnEnemy().CancelWith(gameObject)); 
     }
-
-    private  void InizializeBulletList()
+    private void InitializeCollections()
     {
-        bulletPool = new List<GameObject>();
-        for (int i = 20; i>= bulletPool.Count; i--)
+        foreach (PoolObject coll in collections)
         {
-            Bullet bulletInstance = bulletCollection.TakeBullet(default);
-            GameObject bulletPrefab = bulletInstance.gameObject;
-            bulletPrefab.SetActive(false);
-            bulletPool.Add(bulletPrefab);
-        }
-    }
+            coll.collection = new List<GameObject>();
 
-    public void SpawnBullet()
-    {
-        foreach (GameObject obj in bulletPool)
-        {
-            if (!obj.activeSelf)
+            for (int i = 0; i < coll.numberOfObjects; i++)
             {
-                GameObject bulletPrefab = obj;
-                var script = bulletPrefab.GetComponent<Bullet>();
-                script.ResetPosition();
-                bulletPrefab.SetActive(true);
-                break;
+                GameObject obj = Instantiate(coll.prefab, this.transform);
+                obj.SetActive(false);
+                coll.collection.Add(obj);
             }
-            else continue;
         }
-
     }
-
-
-    protected  IEnumerator<float> SpawnEnemy()
+    public GameObject GetObjectFromCollection(EPoolObjectType id)
     {
-        while (true)
+        foreach (PoolObject coll in collections)
         {
-            GameObject enemyPrefab;
-            bool CanRecycle = false;
-            if (objectPool.Count > 0)//If have deactive enemy in list take it
+            if (coll.objID == id)
             {
-                foreach (GameObject obj in objectPool)
+                foreach (GameObject obj in coll.collection)
                 {
                     if (!obj.activeSelf)
                     {
-                        enemyPrefab = obj;
-                        var script= enemyPrefab.GetComponent<Enemy>();
-                        enemyPrefab.SetActive(true);
-                        script.FindAlternativePosition();
-                        CanRecycle = true;
-                        break;
+                        return obj;
                     }
                 }
+
+                // If all objects in the pool are in use, expand the pool
+                GameObject newObj = Instantiate(coll.prefab);
+                newObj.SetActive(false);
+                coll.collection.Add(newObj);
+                return newObj;
             }
-            if (!CanRecycle && enemyCollection != null) // If dont'have deactiveted enemy in list, take it from Collection
-            {
-                enemyPrefab = InstantiateEnemyFromCollection(enemyCollection);
-                objectPool.Add(enemyPrefab);
-            }
+        }
+
+        // If the specified id is not found, return null
+        return null;
+    }
+    public void SpawnBullet()
+    {
+        GameObject bullet = GetObjectFromCollection(EPoolObjectType.bullet);
+        bullet.SetActive(true);
+    }
+    protected IEnumerator<float> SpawnEnemy()
+    {
+        while (true)
+        {
+            GameObject enemyShip = GetObjectFromCollection(EPoolObjectType.enemy_default);
+            enemyShip.SetActive(true);
+
             yield return Timing.WaitForSeconds(spawnInterval);
         }
     }
-
-    GameObject InstantiateEnemyFromCollection(EnemyCollection collection)
-    {
-        if (collection != null)
-        {
-            Enemy enemyInstance = collection.TakeEnemy(default);//prende un proiettile con id default
-
-            if (enemyInstance != null)
-            {
-                return enemyInstance.gameObject;
-            }
-        }
-        return null;
-
-    }
-
-
-
 }

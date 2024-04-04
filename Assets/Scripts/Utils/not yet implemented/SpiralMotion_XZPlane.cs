@@ -12,25 +12,26 @@ public class SpiralMotion_XZPlane : AbstractCircularMotion
 
     private float radius;
 
-    new void Start()
+    void Start()
     {
-        radius = Vector3.Distance(transform.position, targetTransform.position);
+        radius = Vector3.Distance(transform.position, targetPosition);
 
-        base.Start();
+        currentSpeed = speed;
+        Timing.RunCoroutine(Move());
     }
     protected override IEnumerator<float> Move()
     {
         while (true)
         {
             // relative vector from center to object
-            Vector3 relativePos = transform.position - targetTransform.position;
+            Vector3 relativePos = transform.position - targetPosition;
 
             // Align rotation to radius direction vector, in order to always face the center object
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
 
             // compute new position
-            Vector3 newPosition = targetTransform.position;
+            Vector3 newPosition = targetPosition;
             newPosition.x += semiaxis_A * radius * Mathf.Cos(angle);
             newPosition.z += semiaxis_B * radius * Mathf.Sin(angle);
             transform.position = newPosition;

@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed7cd79a320e46249830362b64bb7a33, type: 3}
-  m_Name: EnemyCollection
+  m_Script: {fileID: 11500000, guid: cbeb59d1a9d7be44aa01278f72448373, type: 3}
+  m_Name: BoxCollection
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 11400000, guid: 1e3fce471e358004ca288750d4b39d65, type: 2}
+  objID: 4
+  prefab: {fileID: 2018091963255080869, guid: 1dfbf29dbc5528e49bdc3e8715e4691b, type: 3}
+  numberOfObjects: 10
+  collection:
+  - {fileID: 0}

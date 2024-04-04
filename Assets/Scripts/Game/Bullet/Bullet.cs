@@ -11,10 +11,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     [SerializeField]
     private Rigidbody rb;
-    private Vector3 centerPositionMap;
-    private float distanceTraveled;
-    private float distanceThreshold = 300f;
-
+    private readonly float distanceThreshold = 300f;
 
     public void Start()
     {
@@ -27,39 +24,37 @@ public class Bullet : MonoBehaviour
 
         target = targetObject.transform; 
         transform.position = targetObject.transform.position - targetObject.transform.forward * distance; // position of bullet forward player
-        centerPositionMap = Vector3.zero;
-        distanceTraveled = 0f;
         Vector3 perpendicularDirection = Quaternion.Euler(0, 180, 0) * target.forward;//Instantiate the bullet towards the sides of the map
         Timing.RunCoroutine(Movement(perpendicularDirection));
     }
-
+    void OnEnable()
+    {
+        ResetPosition();
+    }
     public void ResetPosition()
     {
         Start();
     }
-
     protected IEnumerator<float> Movement(Vector3 perpendicularDirection)
     {
+        Vector3 oldPosition = transform.position;
+        float distanceTraveled = 0.0f;
+
         while (true)
         {
             if (this != null)
             {
-                
                 rb.velocity = perpendicularDirection * speed;
                 //Direction outside map
                 
-                distanceTraveled = (transform.position - centerPositionMap).magnitude;
+                distanceTraveled = (transform.position - oldPosition).magnitude;
                 if (distanceTraveled >= distanceThreshold)
                 {
-                    //DeactivateBulletAtdistanceThreshold
                     gameObject.SetActive(false);
                     break;
                 }
-                yield return Timing.DeltaTime;
+                yield return Timing.WaitForOneFrame;
             }
         }
-        StopCoroutine("Movement");
     }
-
-
 }
