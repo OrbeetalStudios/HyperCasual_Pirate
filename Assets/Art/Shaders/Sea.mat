@@ -47,16 +47,16 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 2
-    - _Depth: 3.55
+    - _Depth: 100
     - _DstBlend: 10
     - _QueueControl: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _Surface: 1
-    - _ViewWaves: 0.46
-    - _WaveAmplitude: 20.16
-    - _WaveSpeed: 0.87
+    - _ViewWaves: 20
+    - _WaveAmplitude: 28.6
+    - _WaveSpeed: 0.05
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
