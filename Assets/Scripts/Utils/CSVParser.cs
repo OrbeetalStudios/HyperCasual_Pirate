@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 
-public class CSVReader
+public class CSVParser
 {
     static readonly string SPLIT_CH = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     static readonly string LINE_SPLIT_CH = @"\r\n|\n\nr|\n|\r";
@@ -11,9 +11,10 @@ public class CSVReader
     public static List<Dictionary<string, object>> Read(string fileName)
     {
         var returnData = new List<Dictionary<string, object>>();
-        TextAsset fileData = Resources.Load(fileName) as TextAsset;
 
-        var linesOfData = Regex.Split(fileData.text, LINE_SPLIT_CH);
+        string fileData = TextFileReader.ReadFileAsText(fileName);
+
+        var linesOfData = Regex.Split(fileData, LINE_SPLIT_CH);
 
         // if csv has only the header or nothing at all, return the empty list
         if (linesOfData.Length <= 1) return returnData;

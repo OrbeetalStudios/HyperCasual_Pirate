@@ -434,11 +434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3fb7d58976c6e48ba78a553ac254ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gc: {fileID: 493272061}
-  objectPool: []
-  bulletPool: []
-  enemyCollection: {fileID: 11400000, guid: 9c9da522ac53e1c4a8057e468497e45f, type: 2}
-  bulletCollection: {fileID: 11400000, guid: abe84de15dc2d8f4eb0a8b0acabd9279, type: 2}
   collections:
   - {fileID: 11400000, guid: fba6e1d344735494dac1368d04de1b50, type: 2}
   - {fileID: 11400000, guid: eada33fc8c8f9e0459f883b569fdce94, type: 2}
@@ -1927,7 +1922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d89cef3b7ff82d49aa04e0df1a4b678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataFile: waves
+  filenameCsv: wavesCsv
+  filenameJson: wavesJson
 --- !u!4 &1414464500
 Transform:
   m_ObjectHideFlags: 0
