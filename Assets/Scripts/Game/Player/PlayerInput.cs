@@ -13,8 +13,6 @@ public class PlayerInput : PlayerMovement
     private float fireRatio;
     private int ammoCount=3;
     [SerializeField]
-    GameController gc;
-    [SerializeField]
     PoolController pool;
     public float raycastDistance;
     public LayerMask raycastMask;
@@ -48,7 +46,7 @@ public class PlayerInput : PlayerMovement
             firePress = true;
             ammoCount--;
             Debug.Log(ammoCount);
-            gc.UpdateAmmo(ammoCount);
+            GameController.Instance.UpdateAmmo(ammoCount);
             pool.SpawnBullet();
             Timing.RunCoroutine(FireRatio(fireRatio).CancelWith(gameObject));
             if (ammoCount < 3 && !isLoading)
@@ -68,7 +66,7 @@ public class PlayerInput : PlayerMovement
             if (reload == 0)
             {
                 ammoCount++; // Incrementa il conteggio delle munizioni
-                gc.UpdateAmmo(ammoCount); // Aggiorna l'HUD
+                GameController.Instance.UpdateAmmo(ammoCount); // Aggiorna l'HUD
                 reload = reloadCannonTime; // Reimposta il tempo di ricarica
             }
 

@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Enemy
   - Box
+  - Mine
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Bullet
   - Island
   - Box
-  - 
+  - Mine
   - 
   - 
   - 

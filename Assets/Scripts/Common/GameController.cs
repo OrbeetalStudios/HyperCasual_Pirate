@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoSingleton<GameController>
 {
     // Dichiarazione degli eventi per la vita, il punteggio e le munizioni
     public event Action<int> LifeUpdated;

@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     private float spawnRadius;
     public Vector3 resetPosition;
     private List<Vector3> spawnPoints = new List<Vector3>();
-    public GameController gc;
     [SerializeField]
     private EnemyMovement movement;
     [SerializeField, Range(0f, 1f)] private float spawnChance = 0.5f;
@@ -29,12 +28,6 @@ public class Enemy : MonoBehaviour
         //Speed
         //type
 
-    }
-
-    private void Start()
-    {
-        GameObject gameController = GameObject.FindWithTag("GameController"); // FindGameControllerForUI
-        gc = gameController.GetComponent<GameController>();
     }
 
     protected void OnEnable()
@@ -77,11 +70,11 @@ public class Enemy : MonoBehaviour
         switch (other.tag)
         {
             case "Player":
-                gc.UpdateLife();
+                GameController.Instance.UpdateLife();
                 gameObject.SetActive(false);
                 break;
             case "Bullet":
-                gc.UpdateScore();
+                GameController.Instance.UpdateScore();
                 SpawnBox();
 
                 gameObject.SetActive(false);
